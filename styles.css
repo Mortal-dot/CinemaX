@@ -674,55 +674,56 @@ button.next-horror {
 
 /* Asegura que las imágenes de las series no se desborden en dispositivos móviles */
 .series-galery img {
-  width: 100%;
-  height: auto;
+  width: 100%; /* Asegura que las imágenes no se desborden */
+  height: auto; /* Mantiene la proporción de las imágenes */
 }
 
 /* Ajustes para la galería en pantallas más pequeñas */
 @media (max-width: 768px) {
-  /* Contenedor principal */
+  /* Para la galería de series */
   .series-galery .carousel-container {
     display: flex;
     overflow: hidden;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* Para que los elementos no se sobrepongan */
   }
 
-  /* Las imágenes dentro del carousel */
+  /* Cada item de la galería ocupa todo el ancho disponible */
   .series-galery .anime-item {
-    flex: 0 0 100%; /* Cada item debe ocupar el 100% del ancho */
-    margin: 10px 0; /* Espaciado adicional entre items */
+    flex: 0 0 100%; /* Cada item ocupará el 100% del ancho en pantallas medianas */
+    margin: 10px 0; /* Espaciado entre los elementos */
   }
 
-  /* Asegura que las flechas de navegación sean visibles y adecuadas para móviles */
+  /* Ajuste de las flechas de navegación para que se vean bien en pantallas pequeñas */
   .series-galery button {
     font-size: 28px;
     padding: 8px;
   }
 
+  /* Título más pequeño en pantallas medianas */
   .series-galery h2 {
-    font-size: 2.5em; /* Título más pequeño en pantallas medianas */
+    font-size: 2.5em;
   }
 }
 
 @media (max-width: 480px) {
-  /* Para dispositivos muy pequeños */
+  /* Para dispositivos móviles muy pequeños */
   .series-galery .carousel-container {
-    display: flex;
-    flex-direction: column; /* Las imágenes se apilan verticalmente */
+    flex-direction: column; /* Los elementos se apilan verticalmente */
   }
 
+  /* Cada item ocupará el 100% del ancho disponible */
   .series-galery .anime-item {
-    flex: 0 0 100%; /* Asegura que cada item ocupe toda la pantalla */
-    margin: 10px 0; /* Espaciado entre items */
+    flex: 0 0 100%;
+    margin: 10px 0;
   }
 
-  /* Ajuste del tamaño de las flechas de navegación */
+  /* Ajuste de las flechas de navegación */
   .series-galery button {
     font-size: 24px;
     padding: 6px;
   }
 
-  /* Título aún más pequeño para pantallas pequeñas */
+  /* Título aún más pequeño en pantallas pequeñas */
   .series-galery h2 {
     font-size: 2em;
   }
