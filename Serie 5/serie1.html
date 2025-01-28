@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproduciendo Serie</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Video de fondo (inicialmente pausado) -->
+<div class="video-background" id="videoBackground">
+    <video id="videoPlayer" muted>
+        <source src="peli/TEMPORADA 1/TH3 W4LK1N1x01.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    <div class="background-overlay"></div>
+</div>
+    
+<!-- Video del trailer como fondo -->
+<div class="video-trailer">
+    <video id="trailer" autoplay loop muted>
+        <source src="peli/The Walking.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    <div class="background-overlay"></div>
+</div>
+
+<!-- Contenedor de la serie -->
+<div class="serie-container">
+    <div class="serie-title">
+        <h1>13 Reasons Why</h1>
+        <div class="serie-info">
+            <span>Tragedia,</span>
+            <span>2 Temporadas.</span>
+        </div>
+    </div>
+
+    <div class="serie-description">
+      <p> La historia de Clay Jensen, un joven que descubre las cintas grabadas por su amiga Hannah Baker, quien se suicidó recientemente. A través de las grabaciones, Hannah revela las 13 razones que la llevaron a tomar esa decisión, vinculadas a personas y eventos de su vida. La serie aborda temas como el bullying, la depresión, el abuso, y las consecuencias de nuestras acciones sobre los demás, mientras Clay y los demás personajes enfrentan las repercusiones de los secretos ocultos y las decisiones que marcaron la vida de Hannah. Luchando no solo contra hordas de infectados, sino también contra otros sobrevivientes dispuestos a todo por sobrevivir.</p>
+    </div>
+
+    <!-- Botones de Like y Dislike -->
+    <div class="like-dislike-buttons">
+        <button class="like-button">👍 Me gusta</button>
+        <button class="dislike-button">👎 No me gusta</button>
+    </div>
+
+    <!-- Botón de Reanudar / Iniciar -->
+    <div class="reanudar-button">
+        <button id="startButton">Iniciar T1:E1</button>
+    </div>
+
+    <!-- Botón de Ver Desde el Inicio -->
+    <div class="ver-inicio-button">
+        <button id="restartButton">Ver desde el inicio</button>
+    </div>
+
+
+<!-- Botón como un enlace para redirigir -->
+<a href="./episodios/Untitled-1.html">
+    <button id="mostrarEpisodiosBtn">Ver más Información</button>
+</a>
+
+
+
+</body>
+</html>
+
+
+<script>
+    // Obtener el botón, video y contenedor
+    const startButton = document.getElementById("startButton");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const videoBackground = document.getElementById("videoBackground");
+    const restartButton = document.getElementById("restartButton");
+
+    // Recuperar los datos almacenados en localStorage
+    let savedTime = localStorage.getItem('videoTime');
+    let savedSeason = localStorage.getItem('currentSeason');
+    let savedEpisode = localStorage.getItem('currentEpisode');
+
+    // Variables de temporada y episodio
+    let currentSeason = savedSeason ? parseInt(savedSeason) : 1;
+    let currentEpisode = savedEpisode ? parseInt(savedEpisode) : 1;
+
+    // Si hay un tiempo guardado, se pone en ese tiempo
+    if (savedTime) {
+        videoPlayer.currentTime = savedTime;
+    }
+
+    // Cambiar el texto del botón de acuerdo a la temporada y episodio
+    if (savedTime && savedTime > 0) {
+        startButton.textContent = `Reanudar T${currentSeason}:E${currentEpisode}`;
+    } else {
+        startButton.textContent = `Iniciar T${currentSeason}:E${currentEpisode}`;
+    }
+
+    // Función para guardar el progreso del video
+    function saveVideoProgress() {
+        localStorage.setItem('videoTime', videoPlayer.currentTime);
+        localStorage.setItem('currentSeason', currentSeason);
+        localStorage.setItem('currentEpisode', currentEpisode);
+    }
+
+    // Función para hacer el video en pantalla completa
+    function goFullScreen() {
+        if (videoPlayer.requestFullscreen) {
+            videoPlayer.requestFullscreen();
+        } else if (videoPlayer.mozRequestFullScreen) { // Firefox
+            videoPlayer.mozRequestFullScreen();
+        } else if (videoPlayer.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            videoPlayer.webkitRequestFullscreen();
+        } else if (videoPlayer.msRequestFullscreen) { // IE/Edge
+            videoPlayer.msRequestFullscreen();
+        }
+    }
+
+    // Función para iniciar o reanudar el video
+    startButton.addEventListener("click", () => {
+        // Activar el sonido del video
+        videoPlayer.muted = false;
+
+        // Reproducir el video (si está pausado o no)
+        videoPlayer.play();
+        videoBackground.style.display = "block"; // Mostrar el fondo del video
+        startButton.textContent = `Reanudar T${currentSeason}:E${currentEpisode}`;
+
+        // Poner el video en pantalla completa
+        goFullScreen();
+    });
+
+    // Función para reiniciar el video sin reproducirlo automáticamente
+    restartButton.addEventListener("click", () => {
+        videoPlayer.currentTime = 0; // Reiniciar el video al principio
+        startButton.textContent = `Iniciar T${currentSeason}:E${currentEpisode}`; // Cambiar el texto del botón
+        videoBackground.style.display = "block"; // Mostrar el fondo del video
+    });
+
+    // Guardar progreso cuando el video es pausado o terminado
+    videoPlayer.addEventListener('pause', saveVideoProgress);
+
+    // Guardar progreso al cerrar o cambiar de página
+    window.addEventListener('beforeunload', saveVideoProgress);
+
+    videoPlayer.addEventListener('ended', () => {
+        // Guardar progreso cuando el video termina
+        saveVideoProgress();
+
+        // Ocultar el video y el fondo cuando termine
+        videoBackground.style.display = "none";
+        startButton.textContent = `Iniciar T${currentSeason}:E${currentEpisode}`;
+    });
+
+    // Detectar cuando la página cambia de visibilidad (minimización, cambio de pestaña)
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            // Pausar el video cuando la ventana se minimiza o cambia de pestaña
+            videoPlayer.pause();
+        }
+    });
+
+    // Detectar cuando el video entra o sale de pantalla completa
+    document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+            // Si no estamos en pantalla completa, pausar el video
+            videoPlayer.pause();
+        }
+    });
+
+    // Para navegadores antiguos que no usan `fullscreenchange`
+    document.addEventListener("webkitfullscreenchange", () => {
+        if (!document.webkitFullscreenElement) {
+            videoPlayer.pause();
+        }
+    });
+
+    document.addEventListener("mozfullscreenchange", () => {
+        if (!document.mozFullScreenElement) {
+            videoPlayer.pause();
+        }
+    });
+
+    document.addEventListener("msfullscreenchange", () => {
+        if (!document.msFullscreenElement) {
+            videoPlayer.pause();
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+    // Mostrar y ocultar la sección de episodios al hacer clic en "Más episodios"
+document.getElementById("moreEpisodesButton").addEventListener("click", function() {
+    const episodiosSection = document.getElementById("episodiosSection");
+    
+    if (episodiosSection.style.display === "none" || episodiosSection.style.display === "") {
+        // Mostrar la sección de episodios
+        episodiosSection.style.display = "block";
+    } else {
+        // Ocultar la sección de episodios
+        episodiosSection.style.display = "none";
+    }
+});
+
+// Función para cambiar la imagen y la descripción cuando se selecciona una temporada
+document.querySelectorAll('.temporada-button').forEach((button, index) => {
+    button.addEventListener('click', () => {
+        const images = document.querySelectorAll('.imagen-temporada img');
+        const description = document.getElementById('temporadaDescription');
+        
+        // Cambiar imagen y descripción basada en la temporada seleccionada
+        images.forEach((image, imgIndex) => {
+            if (imgIndex === index) {
+                image.style.border = '5px solid #e5c39b'; // Resaltar la imagen seleccionada
+            } else {
+                image.style.border = 'none';
+            }
+        });
+
+        // Actualizar la descripción
+        description.textContent = `Esta es la descripción de la Temporada ${index + 1}`;
+    });
+});
+
+// Función para regresar al inicio y ocultar la sección de episodios
+document.getElementById("restartButton").addEventListener("click", function() {
+    const episodiosSection = document.getElementById("episodiosSection");
+    
+    // Ocultar la sección de episodios
+    episodiosSection.style.display = "none";
+    
+    // También podrías resetear la descripción y las imágenes aquí si lo necesitas
+    const description = document.getElementById('temporadaDescription');
+    description.textContent = "Selecciona una temporada para ver más detalles.";
+    
+    const images = document.querySelectorAll('.imagen-temporada img');
+    images.forEach(image => {
+        image.style.border = 'none'; // Eliminar resaltado de imágenes
+    });
+
+
+
+
+
+
+
+
+
+
+// Función para poner el video en pantalla completa
+function goFullScreen(videoPlayer) {
+    if (videoPlayer.requestFullscreen) {
+        videoPlayer.requestFullscreen();
+    } else if (videoPlayer.mozRequestFullScreen) { // Firefox
+        videoPlayer.mozRequestFullScreen();
+    } else if (videoPlayer.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        videoPlayer.webkitRequestFullscreen();
+    } else if (videoPlayer.msRequestFullscreen) { // IE/Edge
+        videoPlayer.msRequestFullscreen();
+    }
+}
+
+// Obtener el video y añadir un evento de clic para ponerlo en pantalla completa
+document.querySelector('#video1').addEventListener('click', function() {
+    goFullScreen(this);  // Activar la pantalla completa
+    this.controls = true; // Aseguramos que los controles siempre estén visibles
+});
+
+// Escuchar el cambio de pantalla completa
+document.querySelector('#video1').addEventListener('fullscreenchange', function() {
+    const video = this;
+
+    // Cuando entremos o salgamos de pantalla completa, aseguramos que los controles sean visibles
+    if (document.fullscreenElement === video) {
+        video.controls = true; // Mantener controles visibles en pantalla completa
+    } else {
+        video.controls = true; // Mantener controles visibles cuando no está en pantalla completa
+    }
+});
+
+// Añadir una verificación extra para asegurarnos que los controles siempre estén visibles incluso cuando se inicia el video
+document.querySelector('#video1').controls = true;  // Asegura que los controles siempre estén habilitados
+
+
+
+
+
+
+
+
+
+
+
+
+// Obtener el botón y la sección de episodios
+const moreEpisodesButton = document.getElementById('moreEpisodesButton');
+const episodiosTemporada2 = document.getElementById('episodiosTemporada2');
+
+// Función para pausar todos los videos
+function pauseAllVideos() {
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(video => {
+        video.pause();  // Pausar cada video
+    });
+}
+
+// Agregar un evento de clic para alternar la visibilidad y pausar videos
+moreEpisodesButton.addEventListener('click', function() {
+    if (episodiosTemporada2.style.display === 'none' || episodiosTemporada2.style.display === '') {
+        // Mostrar la sección de episodios
+        episodiosTemporada2.style.display = 'block'; 
+        moreEpisodesButton.textContent = 'Ocultar Episodios'; // Cambiar el texto del botón
+    } else {
+        // Ocultar la sección de episodios y pausar todos los videos
+        episodiosTemporada2.style.display = 'none'; 
+        moreEpisodesButton.textContent = 'Más episodios'; // Cambiar el texto del botón
+        pauseAllVideos(); // Pausar todos los videos cuando se oculte la sección
+    }
+});
+
+
+
+document.getElementById('mostrarEpisodiosBtn').addEventListener('click', function() {
+    // Toggle la visibilidad de la sección de episodios
+    const episodiosSection = document.getElementById('episoSection');
+    episodiosSection.style.display = episodiosSection.style.display === 'none' ? 'block' : 'none';
+
+    // Si se muestra la sección, agregamos los videos
+    if (episodiosSection.style.display === 'block') {
+        // Crear los nuevos videos de la temporada 2
+        const videosTemporada2 = [
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x01.mp4",
+                title: "Episodio 1"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x02.mp4",
+                title: "Episodio 2"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x03.mp4",
+                title: "Episodio 3"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x04.mp4",
+                title: "Episodio 4"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x05.mp4",
+                title: "Episodio 5"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x06.mp4",
+                title: "Episodio 6"
+            }
+        ];
+
+        // Seleccionar el contenedor donde se agregarán los episodios
+        const episodiosContainer = document.getElementById('episoSection');
+
+        // Crear un contenedor de videos para cada episodio
+        videosTemporada2.forEach(function(video) {
+            const videoContainer = document.createElement('div');
+            videoContainer.classList.add('video-container');
+            
+            const videoElement = document.createElement('video');
+            videoElement.setAttribute('controls', '');
+            videoElement.setAttribute('poster', 'images/rick.jpg');
+            
+            const sourceElement = document.createElement('source');
+            sourceElement.setAttribute('src', video.src);
+            sourceElement.setAttribute('type', 'video/mp4');
+            videoElement.appendChild(sourceElement);
+            
+            const overlay = document.createElement('div');
+            overlay.classList.add('description-overlay');
+            
+            const title = document.createElement('h3');
+            title.textContent = video.title;
+            overlay.appendChild(title);
+            
+            videoContainer.appendChild(videoElement);
+            videoContainer.appendChild(overlay);
+            
+            episodiosContainer.appendChild(videoContainer);
+        });
+    }
+});
+
+    
+
+
+
+
+
+
+
+
+
+document.getElementById('mostrarEpisodiosBtn').addEventListener('click', function() {
+    // Toggle la visibilidad de la sección de episodios
+    const episodiosSection = document.getElementById('episoSection');
+    episodiosSection.style.display = episodiosSection.style.display === 'none' ? 'block' : 'none';
+
+    // Si se muestra la sección, agregamos los videos
+    if (episodiosSection.style.display === 'block') {
+        // Crear los nuevos videos de la temporada 2
+        const videosTemporada2 = [
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x01.mp4",
+                title: "Episodio 1"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x02.mp4",
+                title: "Episodio 2"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x03.mp4",
+                title: "Episodio 3"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x04.mp4",
+                title: "Episodio 4"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x05.mp4",
+                title: "Episodio 5"
+            },
+            {
+                src: "peli/TEMPORADA 2/TH3 W4LK1NG D34D 2x06.mp4",
+                title: "Episodio 6"
+            }
+        ];
+
+        // Seleccionar el contenedor donde se agregarán los episodios
+        const episodiosContainer = document.getElementById('episoSection');
+
+        // Limpiar los episodios previos si los hay
+        episodiosContainer.innerHTML = '';
+
+        // Crear un contenedor de videos para cada episodio
+        videosTemporada2.forEach(function(video) {
+            const videoContainer = document.createElement('div');
+            videoContainer.classList.add('video-container');
+            
+            const videoElement = document.createElement('video');
+            videoElement.setAttribute('controls', '');
+            videoElement.setAttribute('poster', 'images/rick.jpg');
+            
+            const sourceElement = document.createElement('source');
+            sourceElement.setAttribute('src', video.src);
+            sourceElement.setAttribute('type', 'video/mp4');
+            videoElement.appendChild(sourceElement);
+            
+            const overlay = document.createElement('div');
+            overlay.classList.add('description-overlay');
+            
+            const title = document.createElement('h3');
+            title.textContent = video.title;
+            overlay.appendChild(title);
+            
+            videoContainer.appendChild(videoElement);
+            videoContainer.appendChild(overlay);
+            
+            episodiosContainer.appendChild(videoContainer);
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+document.getElementById('mostrarEpisodiosBtn').addEventListener('click', function() {
+    // Toggle la visibilidad de la sección de episodios
+    const episodiosSection = document.getElementById('episoSection');
+    episodiosSection.style.display = episodiosSection.style.display === 'none' ? 'block' : 'none';
+
+    // Si se muestra la sección, agregamos los videos
+    if (episodiosSection.style.display === 'block') {
+        // Crear los nuevos videos de la temporada 3
+        const videosTemporada3 = [
+            {
+                src: "peli/TEMPORADA 1/TH3 W4LK1NG D34D 1x01.mp4",
+                title: "Episodio 1"
+            },
+            {
+                src: "peli/TEMPORADA 1/TH3 W4LK1NG D34D 1x02.mp4",
+                title: "Episodio 2"
+            },
+            {
+                src: "peli/TEMPORADA 1/TH3 W4LK1NG D34D 1x03.mp4",
+                title: "Episodio 3"
+            },
+            {
+                src: "peli/TEMPORADA 1/TH3 W4LK1NG D34D 1x04.mp4",
+                title: "Episodio 4"
+            },
+            {
+                src: "peli/TEMPORADA 1/TH3 W4LK1NG D34D 1x05.mp4",
+                title: "Episodio 5"
+            },
+            {
+                src: "peli/TEMPORADA 1/TH3 W4LK1NG D34D 1x06.mp4",
+                title: "Episodio 6"
+            }
+        ];
+
+        // Seleccionar el contenedor donde se agregarán los episodios
+        const episodiosContainer = document.getElementById('episoSection');
+
+        // Limpiar los episodios previos si los hay
+        episodiosContainer.innerHTML = '';
+
+        // Crear un contenedor de videos para cada episodio
+        videosTemporada3.forEach(function(video) {
+            const videoContainer = document.createElement('div');
+            videoContainer.classList.add('video-container');
+            
+            const videoElement = document.createElement('video');
+            videoElement.setAttribute('controls', '');
+            videoElement.setAttribute('poster', 'images/rick.jpg');
+            
+            const sourceElement = document.createElement('source');
+            sourceElement.setAttribute('src', video.src);
+            sourceElement.setAttribute('type', 'video/mp4');
+            videoElement.appendChild(sourceElement);
+            
+            const overlay = document.createElement('div');
+            overlay.classList.add('description-overlay');
+            
+            const title = document.createElement('h3');
+            title.textContent = video.title;
+            overlay.appendChild(title);
+            
+            videoContainer.appendChild(videoElement);
+            videoContainer.appendChild(overlay);
+            
+            episodiosContainer.appendChild(videoContainer);
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+let videos = document.querySelectorAll('video'); // Selecciona todos los videos.
+    let currentVideo = null; // Variable para almacenar el video que se está reproduciendo.
+
+    // Función para poner el video en pantalla completa.
+    function enterFullScreen(videoElement) {
+        if (videoElement.requestFullscreen) {
+            videoElement.requestFullscreen();
+        } else if (videoElement.mozRequestFullScreen) { // Firefox
+            videoElement.mozRequestFullScreen();
+        } else if (videoElement.webkitRequestFullscreen) { // Chrome, Safari
+            videoElement.webkitRequestFullscreen();
+        } else if (videoElement.msRequestFullscreen) { // IE/Edge
+            videoElement.msRequestFullscreen();
+        }
+    }
+
+    // Pausar todos los videos cuando la ventana se minimiza o se cierra.
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            videos.forEach(function(video) {
+                video.pause(); // Pausar todos los videos
+            });
+        }
+    });
+
+    // Guardar el progreso de cada video utilizando LocalStorage.
+    videos.forEach(function(video) {
+        // Recuperar el progreso si existe.
+        let savedProgress = localStorage.getItem('video-' + video.src);
+        if (savedProgress) {
+            video.currentTime = savedProgress;
+        }
+
+        // Guardar el progreso del video cuando cambia.
+        video.addEventListener('timeupdate', function() {
+            localStorage.setItem('video-' + video.src, video.currentTime);
+        });
+
+        // Añadir un evento al hacer clic para ponerlo en pantalla completa.
+        video.addEventListener('click', function() {
+            // Si ya hay un video en reproducción, pausarlo.
+            if (currentVideo && currentVideo !== video) {
+                currentVideo.pause();
+            }
+
+            currentVideo = video;
+            enterFullScreen(video); // Poner el video en pantalla completa.
+        });
+
+        // Pausar el video cuando la pantalla se minimiza o el video pierde foco.
+        video.addEventListener('pause', function() {
+            currentVideo = null;
+        });
+
+        // Asegurarse de que solo un video se reproduce a la vez.
+        video.addEventListener('play', function() {
+            // Pausar todos los videos excepto el que se está reproduciendo
+            videos.forEach(function(v) {
+                if (v !== video && !v.paused) {
+                    v.pause();
+                }
+            });
+            currentVideo = video;
+        });
+    });
+
+
+
+
+});
+
+
+</script>
+
+</body>
+</html>

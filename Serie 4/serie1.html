@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproduciendo Serie</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Video de fondo (inicialmente pausado) -->
+<div class="video-background" id="videoBackground">
+    <video id="videoPlayer" muted>
+        <source src="peli/TEMPORADA 1/TH3 W4LK1N1x01.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    <div class="background-overlay"></div>
+</div>
+    
+<!-- Video del trailer como fondo -->
+<div class="video-trailer">
+    <video id="trailer" autoplay loop muted>
+        <source src="peli/The Walking.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    <div class="background-overlay"></div>
+</div>
+
+<!-- Contenedor de la serie -->
+<div class="serie-container">
+    <div class="serie-title">
+        <h1>13 REASONS WHY</h1>
+        <div class="serie-info">
+            <span>Drogas,</span>
+            <span>5 Temporadas.</span>
+        </div>
+    </div>
+
+    <div class="serie-description">
+        <p>La historia sigue a Clay Jensen, un joven que recibe una caja con varias cintas grabadas por su amiga Hanna Baker, quien se suicidó. En las cintas, Hanna explica las 13 razones que la llevaron a tomar esa trágica decisión, señalando a diferentes personas y momentos de su vida que contribuyeron a su dolor.
+            Cada episodio se centra en una de esas "razones" o personas, lo que va desvelando las relaciones complicadas entre los personajes y cómo sus acciones, o falta de ellas, afectaron la vida de Hanna.</p>
+    </div>
+
+    <!-- Botones de Like y Dislike -->
+    <div class="like-dislike-buttons">
+        <button class="like-button">👍 Me gusta</button>
+        <button class="dislike-button">👎 No me gusta</button>
+    </div>
+
+    <div id="controlsContainer">
+        <button onclick="previousEpisode()">Anterior Episodio</button>
+        <button id="startButton" onclick="startEpisode()">Iniciar T1 - E1</button>
+        <button onclick="nextEpisode()">Siguiente Episodio</button>
+    </div>
+    <div id="videoContainer"></div>
+    
+    
+   <!-- Botón de Ver Desde el Inicio -->
+<div class="ver-inicio-button">
+    <button id="restartButton" onclick="restartToFirstEpisode()">Ver desde el inicio</button>
+</div>
+
+
+
+<!-- Botón como un enlace para redirigir -->
+<a href="./episodios/Untitled-1.html">
+    <button id="mostrarEpisodiosBtn">Ver más Información</button>
+</a>
+</div>
+
+
+</body>
+</html>
+
+
+<script>
+let currentVideo = null; // Video actualmente en reproducción
+let currentEpisode = getCurrentEpisode('serie1'); // 'serie1' es el identificador de la serie actual
+let currentSeries = 'serie1'; // Se puede cambiar dinámicamente a otras series como 'serie 2', 'serie 3', etc.
+
+// Puedes tener tantas series como desees, sólo debes añadir más entradas en el objeto `episodes`
+const series = {
+    'serie1': [
+        // Temporada 1 (7 episodios)
+        [
+        'https://drive.google.com/file/d/1jfLyfVYxu31fNpVWJDJtgAWrHyRi7v7K/preview', 
+        'https://drive.google.com/file/d/1kE3vpJTvUZxMz6TM-TxAx5D2fiAHCKJt/preview', 
+        'https://drive.google.com/file/d/1w18LoxLKHgmAF9YJACuyp_l0vZsEGRxG/preview', 
+        'https://drive.google.com/file/d/1Qba3YCYhmeMb7EjtKbPPRj5vXa6gELHJ/preview', 
+        'https://drive.google.com/file/d/1i0-jAteSeay_FzCDxtxviN4bdceD3BXJ/preview', 
+        'https://drive.google.com/file/d/1DQiMb10EuOjZOKre9gcpgfxTgvit9d-T/preview', 
+        'https://drive.google.com/file/d/1J3DxKziEALulB9HCL1Tfy2eojpL0bLTO/preview', 
+        'https://drive.google.com/file/d/16piOV6apK-ZzQVv4faFqv-sY1Mtzj6oo/preview', 
+        'https://drive.google.com/file/d/14E86PkC2ac96EiKcscl2K8rWTMWTV-ne/preview', 
+        'https://drive.google.com/file/d/1mxgbs7u617gjBKiKtGJPsGiSsy2myvJy/preview', 
+        'https://drive.google.com/file/d/1EVosT5qGaRVLUWZpg_5lpeIXDBM-07ke/preview', 
+        'https://drive.google.com/file/d/1hBzg9gQg84pdf1MLgBoMIgWK7YN7IqWh/preview', 
+        'https://drive.google.com/file/d/1h3GEHVSSoTNGuXTlVxF2HC53JpTk8nw6/preview'
+        ],
+        // Temporada 2 (13 episodios)
+        [
+        'https://drive.google.com/file/d/1T2EQPvKD053QeBoLN5lwGAYBRrn90f1X/preview', 
+        'https://drive.google.com/file/d/1CLD53yZVQBx1GePwNoPmYM-6y9Bb615M/preview', 
+        'https://drive.google.com/file/d/1RrlSUc2yRqkso2HUzKBwOAQSfQrsc28m/preview', 
+        'https://drive.google.com/file/d/1RJ9FMeVcttis_f7nHNpEz7yLQ5zjRQmb/preview', 
+        'https://drive.google.com/file/d/1A-oINk3wlQCbML30P_lN4pqhylfdsvmo/preview', 
+        'https://drive.google.com/file/d/1pVJE4l6iDQDC5C6itnfhWfB3VqAu0Ko6/preview', 
+        'https://drive.google.com/file/d/1BrH0no0Z7nAASlDS4cJVj-XvFI2xBqwI/preview', 
+        'https://drive.google.com/file/d/1pnqwoxtLtQnApFj_FENfZG3S5aJB8vJt/preview', 
+        'https://drive.google.com/file/d/1AXqKfoPrPei5M97sCRagp83ysOhCqczm/preview', 
+        'https://drive.google.com/file/d/1YG3BWm2ivyedTkgRfW1HJ5UocdxCR-UF/preview', 
+        'https://drive.google.com/file/d/1fDTL0NsvxMaAznyfQ1jPHhedwiZiaK48/preview', 
+        'https://drive.google.com/file/d/19O19u_D8lne2fXQAz5GPNfmKNPy4d2N8/preview', 
+        'https://drive.google.com/file/d/1XG6iUx5DKWwUzfAQQHsjjiu4wyzQwn1s/preview'  
+        ],
+        // Temporada 3 (13 episodios)
+        [
+        'https://drive.google.com/file/d/1NlDqEBkRs-G8xBsauSRhT0jb7ieL-pG2/preview', 
+        'https://drive.google.com/file/d/1uTeMAKJORcPwnbvWeCUREvMHJvpTNjiM/preview', 
+        'https://drive.google.com/file/d/1aKpDtHG0NAUTO62C5Hw6FS1u4tqaYiqc/preview', 
+        'https://drive.google.com/file/d/1XfqGbx3nExwP1T_W-FjnCqPUvyuf1h6T/preview', 
+        'https://drive.google.com/file/d/1G9E2dc7ZwW_mCchcxRFcUDK1o3CRtuxN/preview', 
+        'https://drive.google.com/file/d/1nWA2JlrnX0iDj8eseARPv4P5MEdTF5J9/preview', 
+        'https://drive.google.com/file/d/1AoCGaF7ePZY3iZGMHwQfGj6-K_Mgrts5/preview', 
+        'https://drive.google.com/file/d/10e0YdW-wCzNBkGdibB_36d5iVF-4QvYY/preview', 
+        'https://drive.google.com/file/d/13vm1zlHvTLplfZNG6uDm6qIBVq6P9giC/preview', 
+        'https://drive.google.com/file/d/188-jGFGPuKhSdQnDBwEsLGG6wiv4f9N_/preview', 
+        'https://drive.google.com/file/d/1xlppugi9ka6QcEl5kRCrFmh212-Vt8J_/preview', 
+        'https://drive.google.com/file/d/1CjDC9nR2EQOSceQFlFkEcDt6etZIywhS/preview', 
+        'https://drive.google.com/file/d/1fCIH4Rp9S5oN7eeL-gCP2zq4n1nmNtSu/preview'     
+        ],
+        // Temporada 4 (13 episodios)
+        [
+        'https://drive.google.com/file/d/1uRH3BXgPzvc9XovYnt_iC4xHf39vgZzz/preview', 
+        'https://drive.google.com/file/d/1KKcEOWayrfgSWeC5olby9_wEirY65qAZ/preview', 
+        'https://drive.google.com/file/d/1mkALlb2GfRdtvUwAo4uF2j3F1BOwtxaY/preview', 
+        'https://drive.google.com/file/d/1EzuhOmxywVWcLnQhyFeVJLrd261dXMAo/preview', 
+        'https://drive.google.com/file/d/1afrvJeqQ9sngYZPybQB7GvpxM53mDQEL/preview',  
+        'https://drive.google.com/file/d/1mcrl-7sLX8uXIy2THXZLNp5PLw0mf2d4/preview',  
+        'https://drive.google.com/file/d/14wMZZzXaKaigNeS82epUJZHeR9aeOgIY/preview',  
+        'https://drive.google.com/file/d/1MHJWrc6DMX--cIKF_d0DpQgzHnsjyO2C/preview', 
+        'https://drive.google.com/file/d/1C-VyhQLKiuC3ZrRdLG_XAMPJbblQcZK8/preview',  
+        'https://drive.google.com/file/d/1Nrm1Tg0wzq1DUlDogqcIiNRmqnOdkqn9/preview'     
+      
+        ]
+     
+        
+    ]
+};
+
+
+// Total de episodios para la serie actual
+const totalEpisodes = series[currentSeries].reduce((acc, season) => acc + season.length, 0);
+
+// Función para obtener el episodio actual de una serie específica
+function getCurrentEpisode(seriesName) {
+    return localStorage.getItem(`${seriesName}_currentEpisode`) ? parseInt(localStorage.getItem(`${seriesName}_currentEpisode`)) : 1;
+}
+
+// Función para guardar el episodio actual de una serie
+function saveCurrentEpisode(seriesName, episodeNumber) {
+    localStorage.setItem(`${seriesName}_currentEpisode`, episodeNumber);
+}
+
+// Función para iniciar el episodio
+function startEpisode() {
+    loadVideo(currentEpisode);
+    updateStartButton();
+}
+
+// Función para cargar el video
+function loadVideo(episodeNumber) {
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = '';  // Limpiamos el contenedor antes de agregar el video
+
+    // Calcular la temporada y el episodio
+    let currentSeason = 0;
+    let seasonEpisode = 0;
+    let episodeCount = 0;
+
+    // Determina la temporada y el episodio, teniendo en cuenta que cada temporada tiene diferente cantidad de episodios
+    for (let i = 0; i < series[currentSeries].length; i++) {
+        episodeCount += series[currentSeries][i].length;
+        if (episodeCount >= episodeNumber) {
+            currentSeason = i;
+            seasonEpisode = episodeNumber - (episodeCount - series[currentSeries][i].length) - 1;
+            break;
+        }
+    }
+
+    // Crear iframe para cargar el video
+    const iframe = document.createElement('iframe');
+    iframe.src = series[currentSeries][currentSeason][seasonEpisode] + '?autoplay=1';
+    iframe.width = '560';
+    iframe.height = '315';
+    iframe.frameborder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowfullscreen = true;
+
+    videoContainer.appendChild(iframe);
+    videoContainer.style.display = 'block';
+
+    currentVideo = iframe;
+    currentEpisode = episodeNumber;
+
+    // Guardar el episodio actual para la serie seleccionada
+    saveCurrentEpisode(series[currentSeries].name, currentEpisode);
+
+    // Hacer que el video vaya a pantalla completa si es necesario
+    toggleFullscreen(videoContainer);
+    updateStartButton();
+}
+
+// Función para ir al episodio anterior
+function previousEpisode() {
+    if (currentEpisode > 1) {
+        currentEpisode--;
+        updateStartButton();
+        saveCurrentEpisode(series[currentSeries].name, currentEpisode); // Guarda el episodio anterior para la serie seleccionada
+    }
+}
+
+// Función para ir al siguiente episodio
+function nextEpisode() {
+    if (currentEpisode < totalEpisodes) {
+        currentEpisode++;
+        updateStartButton();
+        saveCurrentEpisode(series[currentSeries].name, currentEpisode); // Guarda el siguiente episodio para la serie seleccionada
+    }
+}
+
+// Función para reiniciar al primer episodio
+function restartToFirstEpisode() {
+    currentEpisode = 1;
+    updateStartButton();
+    saveCurrentEpisode(series[currentSeries].name, currentEpisode); // Reinicia el progreso de la serie seleccionada
+}
+
+// Función para actualizar el botón
+function updateStartButton() {
+    const startButton = document.getElementById('startButton');
+    
+    // Calcular la temporada y el episodio actual
+    let currentSeason = 0;
+    let seasonEpisode = 0;
+    let episodeCount = 0;
+
+    // Determina la temporada y el episodio
+    for (let i = 0; i < series[currentSeries].length; i++) {
+        episodeCount += series[currentSeries][i].length;
+        if (episodeCount >= currentEpisode) {
+            currentSeason = i;
+            seasonEpisode = currentEpisode - (episodeCount - series[currentSeries][i].length) - 1;
+            break;
+        }
+    }
+
+    // Formato T{currentSeason+1}-E{seasonEpisode+1}
+    const seasonText = `T${currentSeason + 1}-E${seasonEpisode + 1}`;
+
+    // Si es el primer episodio de la temporada, mostrar "Iniciar", de lo contrario "Reanudar"
+    if (currentEpisode === 1 || currentEpisode > 1) {
+        startButton.textContent = `Reanudar ${seasonText}`;
+    }
+}
+
+// Función para poner el video en pantalla completa
+function toggleFullscreen(element) {
+    const iframe = element.querySelector('iframe');
+    
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+    }
+
+    element.style.zIndex = "1000";
+}
+
+// Cuando se cambia el estado de pantalla completa
+function onFullscreenChange() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+        if (currentVideo) {
+            stopVideo(currentVideo);
+        }
+
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = '';
+        currentVideo = null;
+        updateStartButton();
+    }
+}
+
+function stopVideo(iframe) {
+    const src = iframe.src.split('?')[0];
+    iframe.src = src;
+}
+
+// Detectar salida de pantalla completa
+document.addEventListener('fullscreenchange', onFullscreenChange);
+document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+document.addEventListener('mozfullscreenchange', onFullscreenChange);
+document.addEventListener('MSFullscreenChange', onFullscreenChange);
+
+// Detectar la tecla Escape para salir del video
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = '';
+        currentVideo = null;
+        updateStartButton();
+    }
+});
+
+// Inicialización para recordar el episodio actual al cargar la página
+window.onload = function() {
+    updateStartButton(); // Actualizar el texto del botón
+}
+
+</script>
+
+</body>
+</html>

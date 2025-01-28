@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproduciendo Película</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>StreamZone</h1>
+        </div>
+    </header>
+
+    <div class="video-background">
+        <!-- Video del trailer como fondo -->
+        <video id="trailerBackground" autoplay loop muted>
+            <source src="peli/Toy.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+        <div class="background-overlay"></div> <!-- Capa de desenfoque -->
+    </div>
+
+    <div class="horror-anime-item" onclick="handleVideoClick(this)">
+        <a href="https://drive.google.com/file/d/1Jnc469UR4qGph0Z2JQup1NBotTLQGOPE/view?usp=sharing" target="_blank">
+            <div class="video-container">
+                <div class="video-overlay"></div> <!-- Overlay de nube -->
+                <iframe src="https://drive.google.com/file/d/1Jnc469UR4qGph0Z2JQup1NBotTLQGOPE/preview" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+        </a>
+    </div>
+    
+    <div class="movie-details">
+        <h2>Monster Inc.</h2> 
+        <p>En"Monsters, Inc. seguimos a Sulley y Mike, dos monstruos que trabajan en la empresa más grande del mundo de los monstruos, especializada en asustar a los niños para generar energía a partir de sus gritos. Sin embargo, cuando una niña humana llamada Boo se cuela en su mundo, la vida de los monstruos da un giro inesperado. Sulley y Mike deberán protegerla mientras enfrentan las complejas reglas de su sociedad y desmantelan un sistema corrupto que pone en peligro el futuro de ambos mundos. A través de humor, valentía y amistad, la película explora el poder de la empatía y el cambio en un mundo gobernado por el miedo.</p>
+    </div>
+    
+    <hr class="separator">
+
+    <footer>
+        <p>&copy; 2025 MiNetflix. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+

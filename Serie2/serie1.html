@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproduciendo Serie</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Video de fondo (inicialmente pausado) -->
+<div class="video-background" id="videoBackground">
+    <video id="videoPlayer" muted>
+        <source src="peli/TEMPORADA 1/TH3 W4LK1N1x01.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    <div class="background-overlay"></div>
+</div>
+    
+<!-- Video del trailer como fondo -->
+<div class="video-trailer">
+    <video id="trailer" autoplay loop muted>
+        <source src="peli/The Walking.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    <div class="background-overlay"></div>
+</div>
+
+<!-- Contenedor de la serie -->
+<div class="serie-container">
+    <div class="serie-title">
+        <h1>THE LAST OF US</h1>
+        <div class="serie-info">
+            <span>Zombies,</span>
+            <span>9 Episodios.</span>
+        </div>
+    </div>
+
+    <div class="serie-description">
+        <p>The Last of Us nos transporta a un mundo desolado después de un apocalipsis zombi, donde la civilización ha caído y la humanidad se enfrenta a su extinción. Joel, un hombre marcado por la tragedia, y Ellie, una joven con la llave de la salvación, deben atravesar un Estados Unidos devastado,<br>
+            luchando no solo contra hordas de infectados, sino también contra otros sobrevivientes dispuestos a todo por sobrevivir.</p>
+    </div>
+
+    <!-- Botones de Like y Dislike -->
+    <div class="like-dislike-buttons">
+        <button class="like-button">👍 Me gusta</button>
+        <button class="dislike-button">👎 No me gusta</button>
+    </div>
+
+    <div id="controlsContainer">
+        <button onclick="previousEpisode()">Anterior Episodio</button>
+        <button id="startButton" onclick="startEpisode()">Iniciar T1 - E1</button>
+        <button onclick="nextEpisode()">Siguiente Episodio</button>
+    </div>
+    <div id="videoContainer"></div>
+    
+    
+   <!-- Botón de Ver Desde el Inicio -->
+<div class="ver-inicio-button">
+    <button id="restartButton" onclick="restartToFirstEpisode()">Ver desde el inicio</button>
+</div>
+
+
+
+<!-- Botón como un enlace para redirigir -->
+<a href="./episodios/Untitled-1.html">
+    <button id="mostrarEpisodiosBtn">Ver más Información</button>
+</a>
+</div>
+
+
+</body>
+</html>
+
+
+<script>
+let currentVideo = null; // Video actualmente en reproducción
+let currentEpisode = localStorage.getItem('currentEpisode') ? parseInt(localStorage.getItem('currentEpisode')) : 1; // Obtener el episodio desde localStorage
+let currentTime = localStorage.getItem('currentTime') ? parseFloat(localStorage.getItem('currentTime')) : 0; // Obtener el tiempo guardado del video
+
+// Asegúrate de que totalEpisodes refleje la cantidad de episodios que tienes
+const episodes = [
+    'https://drive.google.com/file/d/1Igbio0qpmqQiBD5RHt_fDAreCvRpRSfQ/preview', // URL del primer episodio
+    'https://drive.google.com/file/d/1FiIt3jq_Tuy1uuOa6G4tuTYkczladiHo/preview', // URL del segundo episodio
+    'https://drive.google.com/file/d/19cj01NCH7vxxqctrrPeOT8oab5cTAs6S/preview', // URL del tercer episodio
+    'https://drive.google.com/file/d/1NfjNObrrNzbf5jsLI1V97OoeyGwc_kTS/preview', // URL del cuarto episodio
+    'https://drive.google.com/file/d/1LPyH95FW23EK7saPChqKDL5Xjfn4HgK1/preview', // URL del quinto episodio
+    'https://drive.google.com/file/d/1SKRPVW3WuKHcEo4_BZaEaMjQPYbDAame/preview', // URL del sexto episodio
+    'https://drive.google.com/file/d/1626eFsGUMJdzIkEWv7pOoFEzDXTy0Zll/preview', // URL del séptimo episodio
+    'https://drive.google.com/file/d/12f0wt-jVaKXyWkoZ514bynlpIsz5VDdC/preview', // URL del octavo episodio
+    'https://drive.google.com/file/d/1dBqPCGPXcLVDX73EeaVQA-Tr3q0J3fmK/preview', // URL del noveno episodio
+];
+
+// Actualiza totalEpisodes para reflejar el número correcto de episodios
+const totalEpisodes = episodes.length;
+
+// Inicializamos el contenedor de video oculto al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.style.display = 'none'; // Ocultar el video al cargar la página
+});
+
+function startEpisode() {
+    loadVideo(currentEpisode); // Cargar el video del episodio actual
+    updateStartButton(); // Actualizar el texto del botón
+}
+
+function loadVideo(episodeNumber) {
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = ''; // Limpiar el contenedor de video
+
+    const iframe = document.createElement('iframe');
+    iframe.src = episodes[episodeNumber - 1] + '?autoplay=1'; // Cargar el video con autoplay
+    iframe.width = '560';
+    iframe.height = '315';
+    iframe.frameborder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowfullscreen = true;
+
+    videoContainer.appendChild(iframe);
+
+    // Mostrar el contenedor de video
+    videoContainer.style.display = 'block'; // Mostrar el video solo cuando se cargue
+
+    // Actualizar el episodio actual
+    currentVideo = iframe;
+    currentEpisode = episodeNumber;
+
+    // Guardar el episodio actual en localStorage
+    localStorage.setItem('currentEpisode', currentEpisode);
+
+    // Si hay un tiempo guardado, comenzamos desde ahí
+    iframe.onload = function() {
+        if (currentTime > 0) {
+            // Cuando el video ha cargado, reposicionamos el tiempo
+            iframe.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[' + currentTime + ',true]}', '*');
+        }
+
+        // Guardar el progreso mientras se reproduce
+        iframe.contentWindow.addEventListener('message', function(event) {
+            if (event.origin !== 'https://www.youtube.com') return;
+
+            const data = JSON.parse(event.data);
+
+            // Cuando el video está en reproducción, capturamos el tiempo
+            if (data.event === 'onStateChange' && data.info === 1) {
+                setInterval(() => {
+                    // Obtener tiempo de reproducción
+                    iframe.contentWindow.postMessage('{"event":"command","func":"getCurrentTime","args":[]}', '*');
+                }, 1000);
+            }
+
+            // Guardar el tiempo en localStorage
+            if (data.event === 'onStateChange' && data.info === 1) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"getCurrentTime","args":[]}', '*');
+            }
+        });
+    }
+
+    // Asegurarse de que el video se reproduce automáticamente
+    toggleFullscreen(videoContainer); // Poner en pantalla completa
+    updateStartButton(); // Actualizar el texto del botón
+}
+
+function previousEpisode() {
+    if (currentEpisode > 1) {
+        currentEpisode--;
+        updateStartButton(); // Actualizar el texto del botón
+        localStorage.setItem('currentEpisode', currentEpisode); // Guardar el episodio en localStorage
+    }
+}
+
+function nextEpisode() {
+    if (currentEpisode < totalEpisodes) {
+        currentEpisode++;
+        updateStartButton(); // Actualizar el texto del botón
+        localStorage.setItem('currentEpisode', currentEpisode); // Guardar el episodio en localStorage
+    }
+}
+
+// Función para reiniciar al primer episodio sin iniciar el video automáticamente
+function restartToFirstEpisode() {
+    currentEpisode = 1; // Establecer el episodio al primero
+    updateStartButton(); // Actualizar el botón para reflejar el episodio actual
+    localStorage.setItem('currentEpisode', currentEpisode); // Guardar el primer episodio en localStorage
+    localStorage.setItem('currentTime', 0); // Reiniciar el tiempo en localStorage
+}
+
+// Función para actualizar el texto del botón
+function updateStartButton() {
+    const startButton = document.getElementById('startButton');
+    if (currentEpisode === 1) {
+        startButton.textContent = 'Iniciar T1 - E1'; // Texto para el primer episodio
+    } else {
+        startButton.textContent = `Reanudar T1 - E${currentEpisode}`; // Texto para episodios posteriores
+    }
+}
+
+function toggleFullscreen(element) {
+    const iframe = element.querySelector('iframe');
+    
+    // Asegurarse de que solo el iframe y no el contenedor completo se pone en pantalla completa
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
+    }
+
+    // Establecer el iframe como el único elemento visible en pantalla completa
+    element.style.zIndex = "1000"; // Coloca el iframe sobre los otros elementos
+}
+
+// Cuando se cambia el estado de pantalla completa
+function onFullscreenChange() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+        if (currentVideo) {
+            stopVideo(currentVideo);
+        }
+
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = ''; // Eliminar el contenido de videoContainer
+        currentVideo = null; // Limpiar la referencia al video actual
+        updateStartButton(); // Actualizar el botón
+    }
+}
+
+function stopVideo(iframe) {
+    const src = iframe.src.split('?')[0]; // Eliminar parámetros como autoplay
+    iframe.src = src; // Detener el video cambiando el iframe
+}
+
+// Detectar salida de pantalla completa
+document.addEventListener('fullscreenchange', onFullscreenChange);
+document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+document.addEventListener('mozfullscreenchange', onFullscreenChange);
+document.addEventListener('MSFullscreenChange', onFullscreenChange);
+
+// Detectar la tecla Escape para salir del video
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = ''; // Eliminar el iframe del contenedor
+        currentVideo = null; // Limpiar la referencia al video actual
+        updateStartButton(); // Actualizar el botón
+    }
+});
+
+// Inicialización para recordar el episodio actual al cargar la página
+window.onload = function() {
+    updateStartButton(); // Actualizar el texto del botón para reflejar el episodio
+}
+
+</script>
+
+</body>
+</html>

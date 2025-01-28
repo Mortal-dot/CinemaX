@@ -1,0 +1,1151 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+    /* Body */
+    body, html {
+        font-family: 'MedievalSharp', Arial, sans-serif; /* Fuente gótica */
+        color: #ffffff; /* Color blanco para mejorar la visibilidad */
+        background-size: cover; /* Para cubrir toda la pantalla */
+        height: 100%;
+        overflow-x: hidden;
+        margin: 0;
+    }
+
+    /* Para evitar el desbordamiento y centrar el contenido */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 4rem; /* Aumentamos el tamaño del título */
+        color: transparent; /* El color del texto es transparente para que se vea el gradiente */
+        background: linear-gradient(to right, #7eac14 50%, rgb(5, 90, 76) 50%); /* Gradiente de dorado antiguo a blanco */
+        -webkit-background-clip: text; /* Aplica el gradiente al texto */
+        background-clip: text; /* Aplica el gradiente al texto (para navegadores no webkit) */
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), inset 0 0 5px rgba(0, 0, 0, 1); /* Sombra externa y sombra interna negra */
+    }
+    
+
+    p {
+        font-size: 1.5rem; /* Aumentamos el tamaño del párrafo */
+        color: #8ba0b1; /* Color suave, dorado-antiguo */
+        line-height: 1.8; /* Mayor espacio entre las líneas */
+        margin-top: 15px; /* Espacio superior para el párrafo */
+    }
+/* Video Background */
+.video-background, .video-trailer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Ajuste para que ocupe toda la altura de la pantalla */
+    z-index: -1;
+    overflow: hidden;
+}
+
+#trailerBackground, #trailer {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Capa semi-translúcida oscura */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    z-index: -1;
+}
+
+/* Video Container */
+.video-container {
+    margin-top: 60px; /* Ajustado para pantallas más pequeñas */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    background: linear-gradient(145deg, #444, #111);
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.video-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 0, 0, 0.7);
+    border: 3px solid #580e0e;
+    filter: brightness(1.2);
+}
+
+#videoPlayer {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Movie Details */
+.movie-details {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.movie-details h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #FF6347 33%, #FFFFFF 33%, #FF6347 66%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+.movie-details p {
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.8;
+}
+
+/* Botones de Like y Dislike */
+.like-dislike-buttons, .reanudar-button, .ver-inicio-button, .mas-episodios-button {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    margin: 5px;
+    background-color: #6c5436;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4b3c31;
+}
+
+/* Separador */
+.separator {
+    border: none;
+    height: 15px;
+    background-color: rgba(106, 10, 126, 0.7);
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+    color: #888888;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .video-container {
+        margin-top: 60px;
+    }
+
+    #videoPlayer {
+        width: 100%;
+    }
+
+    .movie-details h2 {
+        font-size: 24px;
+    }
+
+    .movie-details p {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 20px;
+    }
+
+    .separator {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container {
+        margin-top: 40px;
+    }
+
+    #videoPlayer {
+        width: 100%;
+    }
+
+    .movie-details h2 {
+        font-size: 20px;
+    }
+
+    .movie-details p {
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 18px;
+    }
+
+    button {
+        padding: 14px 30px;
+        font-size: 1.2rem;
+    }
+}
+
+
+
+/* Agrandar la letra de todo el contenedor */
+.serie-container {
+    font-size: 2.0em; /* Aumenta el tamaño de la fuente */
+}
+
+/* Agrandar la letra del título */
+.serie-title h1 {
+    font-size: 3.0em; /* Aumenta el tamaño del título */
+}
+
+/* Agrandar la letra de la información */
+.serie-info span {
+    font-size: 1.5em; /* Aumenta el tamaño de la fuente de los span */
+}
+
+
+.serie-container {
+    margin-top: 200px; /* Ajusta el valor según lo que necesites para mover el contenido hacia abajo */
+}
+.serie-info {
+    margin-bottom: 25px; /* Espacio entre la información de la serie y la descripción */
+}
+
+.serie-description {
+    margin-top: 20px; /* Agrega espacio adicional si lo necesitas */
+}
+
+/* Si también quieres mover los botones y el pie de página hacia abajo, agrega un margen superior a cada sección individual */
+.like-dislike-buttons,
+.reanudar-button,
+.ver-inicio-button,
+.mas-episodios-button,
+footer {
+    margin-top: 15px; /* Ajusta este valor según lo necesites */
+}
+
+
+
+/* Aseguramos que los contenedores de los botones estén centrados */
+.like-dislike-buttons, .reanudar-button, .ver-inicio-button, .mas-episodios-button {
+    display: flex; /* Usamos flexbox para centrar el contenido */
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center; /* Centra los botones verticalmente */
+    margin: 10px 0; /* Espacio entre los contenedores */
+}
+
+/* Estilos de los botones */
+button {
+    padding: 10px 20px; /* Relleno para hacer los botones más grandes */
+    font-size: 1.2rem; /* Aumentar el tamaño de la fuente */
+    background-color: #000000; /* Color de fondo */
+    color: #ffffff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo mano */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    margin: 5px; /* Espacio entre los botones */
+}
+
+/* Efecto al pasar el ratón sobre el botón */
+button:hover {
+    background-color: #070303; /* Color de fondo más claro al pasar el ratón */
+    transform: scale(1.05); /* Efecto de agrandar el botón */
+}
+
+
+
+
+
+
+
+
+
+
+/* Estilos generales */
+body {
+    font-family: 'MedievalSharp', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: white;
+}
+
+.mas-episodios-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.mas-episodios-button button {
+    padding: 10px 20px;
+    background-color: #000000a9;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.mas-episodios-button button:hover {
+    background-color: #0f0505d3;
+}
+
+/* Sección de episodios */
+.episodios-section {
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Ocultar la sección inicialmente */
+}
+
+.episodios-title h2 {
+    font-size: 2rem;
+    color: #e5c39b;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);
+}
+
+.temporadas-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten si se excede el tamaño */
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.temporada-button {
+    background-color: #701212;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.temporada-button:hover {
+    background-color: #9f2b2b;
+}
+
+/* Estilo de las imágenes y descripción */
+.imagenes-temporadas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+
+
+/* Nueva pestaña con la descripción */
+.episodios-details {
+    display: none; /* Ocultar por defecto */
+    margin-top: 20px;
+}
+
+.episodios-details.active {
+    display: block;
+}
+
+.episodios-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.episodios-details p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+/* Contenedor del video */
+.video-container {
+    position: relative;
+    overflow: hidden; /* Asegura que el video no se salga del contenedor */
+    background-color: transparent; /* Eliminar cualquier fondo de color */
+    display: inline-block; /* Hace que el contenedor solo ocupe el espacio necesario */
+    border-radius: 10px; /* Borde redondeado para el contenedor */
+    transition: all 0.4s ease; /* Suavizar transición para bordes y sombras */
+    padding-top: 20px; /* Asegura que no haya espacios innecesarios en la parte superior */
+}
+
+/* Estilo para el video */
+#video1 {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Borde redondeado para el video */
+    transform: translateY(-15px); /* Mueve el video hacia arriba */
+}
+
+/* Efecto de "nube" con bordes brillantes al pasar el mouse sobre el contenedor */
+.video-container:hover {
+    box-shadow: 0 0 30px 20px rgba(255, 255, 255, 0.7); /* Sombra difusa con efecto de nube */
+    transform: scale(0.80); /* Ligero aumento de tamaño */
+    border: 3px solid rgba(255, 255, 255, 0.8); /* Borde brillante alrededor del video */
+}
+
+/* Eliminar cualquier borde o contorno de foco en el contenedor */
+.video-container:focus {
+    outline: none;
+}
+
+
+
+
+
+
+
+/* Contenedor del carrusel */
+.imagenes-temporadas-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+}
+
+/* Carrusel */
+.imagenes-temporadas {
+    display: flex; /* Organiza los elementos horizontalmente */
+    transition: transform 0.5s ease; /* Suaviza el movimiento */
+}
+
+/* Contenedor de cada video */
+.imagen-temporada {
+    min-width: 300px; /* Ancho mínimo de cada video */
+    flex-shrink: 0; /* Evita que se encojan */
+    margin-right: 20px; /* Espacio entre los videos */
+}
+
+/* Estilo para el video */
+.video-container {
+    position: relative;
+    background-color: transparent;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Estilo para los botones */
+.carrusel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para cada imagen de la temporada */
+.imagen-temporada {
+    flex-shrink: 0; /* No permite que las imágenes se reduzcan de tamaño */
+    width: 25%; /* Cada imagen ocupará el 25% del ancho del contenedor */
+    margin-right: 20px; /* Espacio entre las imágenes */
+    display: flex; /* Asegura que el video se centre correctamente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para los botones */
+.carrusel-controls {
+    position: absolute;
+    top: 50%; /* Los coloca verticalmente en el medio */
+    left: 50%; /* Los coloca horizontalmente en el medio */
+    transform: translate(-50%, -50%); /* Centra los botones */
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Los coloca a lo largo del ancho */
+    z-index: 10; /* Asegura que los botones estén por encima de las imágenes */
+}
+
+.carrusel-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.carrusel-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
+
+
+
+
+
+/* Estilo para los botones */
+.carrusel-controls {
+    position: absolute;
+    top: 50%; /* Los coloca verticalmente en el medio */
+    left: 50%; /* Los coloca horizontalmente en el medio */
+    transform: translate(-50%, -50%); /* Centra los botones */
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Los coloca a lo largo del ancho */
+    z-index: 10; /* Asegura que los botones estén por encima de las imágenes */
+}
+
+.carrusel-controls button {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo transparente oscuro */
+    color: white; /* Texto en blanco */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Padding alrededor del texto */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor a mano cuando se pasa por encima */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.carrusel-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro cuando se pasa el ratón */
+}
+
+.carrusel-controls button:focus {
+    outline: none; /* Evita que se vea el borde de enfoque cuando se hace clic */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo general de las imágenes */
+.imagenes-temporadas {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+}
+
+.imagen-temporada {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+/* Estilo para el contenedor del video */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilo para la superposición de texto */
+.description-overlay {
+    position: absolute;
+    top: 100%; /* Inicialmente fuera de la vista */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.829);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    transition: top 0.3s ease;
+    text-align: center;
+    pointer-events: none; /* Permite que el video sea interactuable */
+}
+
+/* Mostrar la superposición al pasar el ratón sobre el video */
+.video-container:hover .description-overlay {
+    top: 0; /* El texto se desliza hacia abajo desde fuera */
+}
+
+/* Opcional: Estilo de las imágenes */
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilo del botón para Temporada 2 */
+.temporada-button {
+    background-color: #e50914; /* Rojo típico de Netflix */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Para dejar espacio entre el botón y los videos */
+}
+
+.temporada-button:hover {
+    background-color: #b40710; /* Color más oscuro al pasar el ratón */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo general de las imágenes */
+.imagenes-temporadas {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+}
+
+.imagen-temporada {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+/* Estilo para el contenedor del video */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilo para la superposición de texto */
+.description-overlay {
+    position: absolute;
+    top: 100%; /* Inicialmente fuera de la vista */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.829);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    transition: top 0.3s ease;
+    text-align: center;
+    pointer-events: none; /* Permite que el video sea interactuable */
+}
+
+/* Mostrar la superposición al pasar el ratón sobre el video */
+.video-container:hover .description-overlay {
+    top: 0; /* El texto se desliza hacia abajo desde fuera */
+}
+
+/* Opcional: Estilo de las imágenes */
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilo del botón para Temporada 3 */
+.temporada-button {
+    background-color: #e50914; /* Rojo típico de Netflix */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Para dejar espacio entre el botón y los videos */
+}
+
+.temporada-button:hover {
+    background-color: #b40710; /* Color más oscuro al pasar el ratón */
+}
+
+
+
+
+
+ /* Estilos de ejemplo, ajusta según tus necesidades */
+ body {
+    font-family: 'MedievalSharp', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.video-background, .video-trailer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.video-background video, .video-trailer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.serie-container {
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 20px;
+}
+.serie-title h1 {
+    font-size: 3em;
+}
+.serie-info {
+    font-size: 1.2em;
+}
+.serie-description p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+.like-dislike-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
+#startButton, #restartButton, #mostrarEpisodiosBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+#videoContainer {
+    margin-top: 20px;
+}
+#minimizeButton {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
+#controlsContainer {
+    position: relative;
+    z-index: 10; /* Asegura que los botones estén por encima del video si se coloca en pantalla completa */
+}
+
+#videoContainer {
+    display: none; /* Inicialmente oculto */
+    width: 560px;
+    height: 315px;
+    position: absolute; /* No afecta el flujo del layout */
+    top: 0; /* Si es necesario, ajusta según el espacio disponible */
+    left: 0; /* Si es necesario, ajusta según el espacio disponible */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body, html {
+    font-family: 'MedievalSharp', Arial, sans-serif; /* Fuente gótica */
+    color: #ffffff; /* Color blanco para mejorar la visibilidad */
+    background-size: cover; /* Para cubrir toda la pantalla */
+    height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+/* Para evitar el desbordamiento y centrar el contenido */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 4rem; /* Aumentamos el tamaño del título */
+    color: transparent; /* El color del texto es transparente para que se vea el gradiente */
+    background: linear-gradient(to right, #9e1313 50%, rgb(0, 0, 0) 50%); /* Gradiente de dorado antiguo a blanco */
+    -webkit-background-clip: text; /* Aplica el gradiente al texto */
+    background-clip: text; /* Aplica el gradiente al texto (para navegadores no webkit) */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), inset 0 0 5px rgba(0, 0, 0, 1); /* Sombra externa y sombra interna negra */
+}
+
+p {
+    font-size: 1.5rem; /* Aumentamos el tamaño del párrafo */
+    color: #8ba0b1; /* Color suave, dorado-antiguo */
+    line-height: 1.8; /* Mayor espacio entre las líneas */
+    margin-top: 15px; /* Espacio superior para el párrafo */
+}
+
+/* Video Background */
+.video-background, .video-trailer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Ajuste para que ocupe toda la altura de la pantalla */
+    z-index: -1;
+    overflow: hidden;
+}
+
+#trailerBackground, #trailer {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Capa semi-translúcida oscura */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    z-index: -1;
+}
+
+/* Video Container */
+.video-container {
+    margin-top: 60px; /* Ajustado para pantallas más pequeñas */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    background: linear-gradient(145deg, #444, #111);
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.video-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 0, 0, 0.7);
+    border: 3px solid #580e0e;
+    filter: brightness(1.2);
+}
+
+#videoPlayer {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Movie Details */
+.movie-details {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.movie-details h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #ff4747 33%, #FFFFFF 33%, #FF6347 66%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+.movie-details p {
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.8;
+}
+
+/* Botones de Like y Dislike */
+.like-dislike-buttons, .reanudar-button, .ver-inicio-button, .mas-episodios-button {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    margin: 5px;
+    background-color: #6c5436;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto al pasar el ratón sobre el botón */
+button:hover {
+    background-color: #4b3c31;
+}
+
+/* Separador */
+.separator {
+    border: none;
+    height: 15px;
+    background-color: rgba(106, 10, 126, 0.7);
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+    color: #888888;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .video-container {
+        margin-top: 60px;
+    }
+
+    #videoPlayer {
+        width: 100%;
+    }
+
+    .movie-details h2 {
+        font-size: 24px;
+    }
+
+    .movie-details p {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 20px;
+    }
+
+    .separator {
+        margin-top: 50px;
+    }
+
+    /* Botones en pantallas medianas */
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container {
+        margin-top: 40px;
+    }
+
+    #videoPlayer {
+        width: 100%;
+    }
+
+    .movie-details h2 {
+        font-size: 20px;
+    }
+
+    .movie-details p {
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 18px;
+    }
+
+    button {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Agrandar la letra de todo el contenedor */
+.serie-container {
+    font-size: 2.0em; /* Aumenta el tamaño de la fuente */
+}
+
+/* Agrandar la letra del título */
+.serie-title h1 {
+    font-size: 3.0em; /* Aumenta el tamaño del título */
+}
+
+/* Agrandar la letra de la información */
+.serie-info span {
+    font-size: 1.5em; /* Aumenta el tamaño de la fuente de los span */
+}
+
+.serie-container {
+    margin-top: 200px; /* Ajusta el valor según lo que necesites para mover el contenido hacia abajo */
+}
+
+.serie-info {
+    margin-bottom: 25px; /* Espacio entre la información de la serie y la descripción */
+}
+
+.serie-description {
+    margin-top: 20px; /* Agrega espacio adicional si lo necesitas */
+}
+
+/* Botones y pie de página con margen */
+.like-dislike-buttons,
+.reanudar-button,
+.ver-inicio-button,
+.mas-episodios-button,
+footer {
+    margin-top: 15px; /* Ajusta este valor según lo necesites */
+}
+
+/* Botones centrados */
+.like-dislike-buttons, .reanudar-button, .ver-inicio-button, .mas-episodios-button {
+    display: flex; /* Usamos flexbox para centrar el contenido */
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center; /* Centra los botones verticalmente */
+    margin: 10px 0; /* Espacio entre los contenedores */
+}
+
+/* Estilos de los botones */
+button {
+    padding: 10px 20px; /* Relleno para hacer los botones más grandes */
+    font-size: 1.2rem; /* Aumentar el tamaño de la fuente */
+    background-color: #000000; /* Color de fondo */
+    color: #ffffff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo mano */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    margin: 5px; /* Espacio entre los botones */
+}
+
+/* Efecto al pasar el ratón sobre el botón */
+button:hover {
+    background-color: #070303; /* Color de fondo más claro al pasar el ratón */
+    transform: scale(1.05); /* Efecto de agrandar el botón */
+}
+
+/* Contenedor del carrusel */
+.imagenes-temporadas-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+}
+
+.imagenes-temporadas {
+    display: flex;
+    transition: transform 0.3s ease; /* Transición suave para mover las imágenes */
+}
+
+.imagen-temporada {
+    width: 100%; /* Las imágenes ocupan todo el ancho del contenedor */
+    height: 400px; /* Ajusta la altura según sea necesario */
+    object-fit: cover; /* Las imágenes se ajustan para cubrir el contenedor */
+}
+
+/* Botones de navegación del carrusel */
+.boton-carrusel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.boton-carrusel.izquierda {
+    left: 10px;
+}
+
+.boton-carrusel.derecha {
+    right: 10px;
+}
