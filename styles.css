@@ -647,15 +647,16 @@ button.next-horror {
 /* Responsive */
 @media (max-width: 768px) {
   .horror-series-galery .horror-anime-item {
-      width: 240px;
+      width: 270px;
   }
 }
 
 @media (max-width: 480px) {
   .horror-series-galery .horror-anime-item {
-      width: 200px;
+      width: 230px;
   }
 }
+
 
 
 
