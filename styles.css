@@ -740,3 +740,50 @@ body {
 
 
 
+/* Asegurar que las imágenes en la galería de series no se desborden */
+.series-galery img {
+  width: 100%; 
+  height: auto;
+}
+
+/* Asegurarse de que la galería de series tenga un comportamiento de flexibilidad */
+.series-galery .carousel-container {
+  display: flex;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .series-galery {
+    grid-template-columns: repeat(2, 1fr); /* 2 elementos por fila en pantallas medianas */
+  }
+
+  .series-galery .anime-item {
+    width: 100%; /* Asegura que los items no se sobrepongan */
+    margin: 10px 0; /* Espaciado adicional */
+  }
+
+  .series-galery header h1 {
+    font-size: 2.5em; /* Ajustar el tamaño del título en pantallas más pequeñas */
+  }
+
+  .series-galery button {
+    font-size: 28px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .series-galery {
+    grid-template-columns: 1fr; /* 1 elemento por fila en pantallas pequeñas */
+  }
+
+  .series-galery .anime-item {
+    width: 100%;
+    margin: 10px 0; /* Espaciado adicional */
+  }
+
+  .series-galery button {
+    font-size: 28px;
+    padding: 8px;
+  }
+}
