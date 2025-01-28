@@ -525,15 +525,16 @@ button.next {
   right: 20px;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-  .anime-item {
-    width: 180px;
+  .series-galery .anime-item {
+      width: 270px;
   }
 }
 
 @media (max-width: 480px) {
-  .anime-item {
-    width: 150px;
+  .series-galery .anime-item {
+      width: 230px;
   }
 }
 
@@ -653,10 +654,9 @@ button.next-horror {
 
 @media (max-width: 480px) {
   .horror-series-galery .horror-anime-item {
-      width: 230px;
+      width: 250px;
   }
 }
-
 
 
 
