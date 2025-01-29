@@ -443,7 +443,7 @@ body {
   width: 100%; /* Aseguramos que el contenedor ocupe el 100% del espacio */
   overflow: hidden;
   background-color: #000000;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 h2 {
@@ -527,13 +527,13 @@ button.next {
 
 @media (max-width: 768px) {
   .anime-item {
-    width: 100px;
+    width: 70px;
   }
 }
 
 @media (max-width: 480px) {
   .anime-item {
-    width: 160px;
+    width: 70px;
   }
 }
 
@@ -670,20 +670,10 @@ button.next-horror {
 
 
 
-/* Optimización para la barra de desplazamiento */
-body {
-  overflow-x: hidden; /* Evitar desplazamiento horizontal en pantallas pequeñas */
-}
-
 /* Asegurar que las imágenes y los videos se ajusten bien */
 .anime-item img, .anime-item video {
   width: 100%; /* Asegura que las imágenes no se desborden */
   height: auto;
-}
-
-/* Evitar que los elementos se sobrepongan */
-.anime-gallery, .horror-series-galery {
-  padding: 10px;
 }
 
 
