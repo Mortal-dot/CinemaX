@@ -470,7 +470,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 300px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 330px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -526,19 +526,19 @@ button.next {
   right: 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .series-galery .anime-item {
-      width: -10px;
+  .anime-item {
+    width: 180px;
   }
 }
 
 @media (max-width: 480px) {
-  .series-galery .anime-item {
-      width: -90px;
+  .anime-item {
+    width: 150px;
   }
 }
 
+  
   
   
 
