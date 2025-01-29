@@ -327,8 +327,8 @@ body {
 .series-galery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 50px;
-    padding: 50px;
+    gap: 100px;
+    padding: 100px;
   }
   
   /* Estilo para cada ítem de serie */
@@ -340,7 +340,7 @@ body {
   }
   
   .anime-item img {
-    width: 100%;
+    width: 200%;
     height: auto;
     transition: transform 0.3s ease; /* Transición suave al hacer hover */
   }
