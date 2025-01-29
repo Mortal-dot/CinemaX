@@ -697,7 +697,7 @@ button.next-horror {
     /* Ajustamos los items para que se alineen correctamente */
     .series-galery .anime-item {
       flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
-      width: 20%; /* Los items de la galería ocuparán el 90% del contenedor */
+      width: 30%; /* Los items de la galería ocuparán el 90% del contenedor */
       margin: 7px 0; /* Mantén un buen espaciado entre los elementos */
     }
   
@@ -719,7 +719,7 @@ button.next-horror {
     }
   
     .series-galery .anime-item {
-      width: 20%; /* Cada item ocupa el 100% del contenedor */
+      width: 40%; /* Cada item ocupa el 100% del contenedor */
       margin: 10px 0;
     }
   
