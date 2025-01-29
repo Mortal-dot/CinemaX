@@ -199,7 +199,7 @@ function loadVideo(episodeNumber) {
         }
     }
 
-    // Crear un contenedor para el video y el botón de pantalla completa
+    // Crear un contenedor para el video
     const videoWrapper = document.createElement('div');
     videoWrapper.classList.add('video-wrapper');
     videoWrapper.id = 'videoWrapper'; // Necesario para fullscreen
@@ -211,18 +211,11 @@ function loadVideo(episodeNumber) {
     iframe.height = '315';
     iframe.frameBorder = '0';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
-    iframe.setAttribute('allowfullscreen', 'true'); // Asegurar compatibilidad con pantalla completa
+    iframe.setAttribute('allowfullscreen', 'true'); // Mantener la opción nativa de pantalla completa
     iframe.id = 'videoPlayer';
-
-    // Crear botón de pantalla completa
-    const fullscreenButton = document.createElement('button');
-    fullscreenButton.textContent = '⛶';
-    fullscreenButton.classList.add('fullscreen-button');
-    fullscreenButton.onclick = () => toggleFullscreen(videoWrapper); // Hacer fullscreen al contenedor
 
     // Agregar elementos al contenedor
     videoWrapper.appendChild(iframe);
-    videoWrapper.appendChild(fullscreenButton);
     videoContainer.appendChild(videoWrapper);
     videoContainer.style.display = 'block'; // Mostrar video minimizado en el centro
 
@@ -231,19 +224,6 @@ function loadVideo(episodeNumber) {
 
     saveCurrentEpisode(currentSeries, currentEpisode);
     updateStartButton(); // Actualizar botón de inicio
-}
-
-// Función para activar pantalla completa
-function toggleFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    }
 }
 
 // Función para ir al episodio anterior
@@ -327,6 +307,7 @@ function stopVideo(iframe) {
 window.onload = function() {
     updateStartButton();
 };
+
 
 </script>
 
