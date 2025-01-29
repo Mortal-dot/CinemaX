@@ -685,20 +685,20 @@ button.next-horror {
 
 /* Ajustes para la galería en pantallas más pequeñas */
 @media (max-width: 768px) {
-  /* Aseguramos que la galería no ocupe todo el ancho, pero que aún tenga un margen */
+  /* Ajustamos el padding del contenedor para que no ocupe todo el ancho */
   .series-galery .carousel-container {
     display: flex;
     overflow: hidden;
     flex-wrap: nowrap; /* Evita que los elementos se sobrepongan */
     justify-content: flex-start; /* Hace que los elementos se alineen a la izquierda */
-    padding: 0 3px; /* Añadimos algo de padding lateral para que no toque el borde de la pantalla */
+    padding: 0 10px; /* Reducimos el padding lateral para que no esté tan grande */
   }
 
   /* Ajustamos los items para que se alineen correctamente */
   .series-galery .anime-item {
     flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
-    width: 40%; /* Los items de la galería ocuparán el 90% del contenedor */
-    margin: 7px 0; /* Mantén un buen espaciado entre los elementos */
+    width: 40%; /* Los items de la galería ocuparán el 40% del contenedor */
+    margin: 7px 5px; /* Añadimos un margen lateral más pequeño */
   }
 
   /* Ajustamos el tamaño de las flechas */
@@ -719,8 +719,8 @@ button.next-horror {
   }
 
   .series-galery .anime-item {
-    width: 15%; /* Cada item ocupa el 100% del contenedor */
-    margin: 10px 0;
+    width: 90%; /* Los elementos ocupan un 90% del ancho disponible */
+    margin: 5px 0; /* Reducimos el margen lateral para un diseño más compacto */
   }
 
   .series-galery button {
