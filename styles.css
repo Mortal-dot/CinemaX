@@ -470,7 +470,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 250px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 200px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -719,7 +719,7 @@ button.next-horror {
     }
   
     .series-galery .anime-item {
-      width: 15%; /* Cada item ocupa el 100% del contenedor */
+      width: 20%; /* Cada item ocupa el 100% del contenedor */
       margin: 10px 0;
     }
   
