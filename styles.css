@@ -528,13 +528,13 @@ button.next {
 
 @media (max-width: 768px) {
   .anime-item {
-    width: -50px;
+    width: -130px;
   }
 }
 
 @media (max-width: 480px) {
   .anime-item {
-    width: -130px;
+    width: -170px;
   }
 }
 
