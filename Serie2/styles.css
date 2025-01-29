@@ -1182,3 +1182,29 @@ button:hover {
         height: auto; /* Ajusta la altura automáticamente para mantener la relación de aspecto */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    #videoContainer {
+        height: 100vh; /* Mantiene la altura en móviles */
+        width: 100vw;
+        padding: 10px; /* Espacio extra para evitar recortes */
+        box-sizing: border-box;
+    }
+
+    #videoContainer iframe {
+        width: 100%;
+        min-height: 56vw; /* Mantiene la proporción 16:9 en móviles */
+    }
+}
