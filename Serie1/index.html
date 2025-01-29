@@ -217,9 +217,9 @@ function loadVideo(episodeNumber) {
     iframe.src = series[currentSeries][currentSeason][seasonEpisode]; // No autoplay
     iframe.width = '560';
     iframe.height = '315';
-    iframe.frameborder = '0';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowfullscreen = true;
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    iframe.setAttribute('allowfullscreen', 'true'); // Asegurar compatibilidad con pantalla completa
 
     // Agregar el video al contenedor
     videoContainer.appendChild(iframe);
@@ -292,6 +292,7 @@ document.addEventListener('keydown', (e) => {
 window.onload = function() {
     updateStartButton();
 };
+
 
 </script>
 
