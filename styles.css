@@ -469,7 +469,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 320px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 270px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
