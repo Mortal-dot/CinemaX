@@ -470,7 +470,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 330px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 100px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -734,23 +734,5 @@ button.next-horror {
   }
   
 
-/* Estilos por defecto (para PC y otros dispositivos más grandes) */
-.anime-item {
-    margin: 0 20px;
-    width: 330px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: rgb(19, 161, 19);
-    transition: transform 0.3s ease;
-}
 
-/* Estilos específicos para dispositivos móviles */
-@media (max-width: 768px) {
-    .anime-item {
-        margin: 0 10px; /* Reducimos el margen en móviles */
-        width: 290px;  /* Reducimos el ancho en móviles */
-    }
-}
+
