@@ -527,13 +527,13 @@ button.next {
 
 @media (max-width: 768px) {
   .anime-item {
-    width: 180px;
+    width: 100px;
   }
 }
 
 @media (max-width: 480px) {
   .anime-item {
-    width: 150px;
+    width: 100px;
   }
 }
 
@@ -653,7 +653,7 @@ button.next-horror {
 
 @media (max-width: 480px) {
   .horror-series-galery .horror-anime-item {
-      width: 200px;
+      width: 250px;
   }
 }
 
