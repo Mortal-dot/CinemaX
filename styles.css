@@ -450,7 +450,7 @@ h2 {
   text-align: center;
   font-family: 'Arial', sans-serif;
   font-size: 2rem;
-  color: #333;
+  color: #fff;
   margin-bottom: 20px;
 }
 
@@ -468,17 +468,16 @@ h2 {
 }
 
 .anime-item {
-    margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 330px; /* Aumentamos el ancho de cada contenedor de serie */
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: rgb(255, 255, 255);
-    transition: transform 0.3s ease;
-  }
-  
+  margin: 0 20px; /* Aumentamos el margen entre los elementos */
+  width: 330px; /* Aumentamos el ancho de cada contenedor de serie */
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+  transition: transform 0.3s ease;
+}
 
 .anime-item:hover {
   transform: scale(1.05);
@@ -487,14 +486,13 @@ h2 {
 
 .anime-item p {
   font-size: 1rem;
-  color: #333;
+  color: #fff;
   padding: 10px;
-  background-color: #0000007c;
+  background-color: rgba(0, 0, 0, 0.7);
   margin: 0;
   text-transform: uppercase;
   font-weight: bold;
-  margin-left: -15px; /* Mueve el contenedor de texto a la izquierda */
-  padding-left: 15px; /* Añade espacio a la izquierda del texto dentro del contenedor */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra del texto para mayor legibilidad */
 }
 
 /* Estilos de botones */
@@ -525,16 +523,38 @@ button.next {
   right: 20px;
 }
 
-/* Responsive */
+/* Responsive para pantallas más pequeñas */
 @media (max-width: 768px) {
   .series-galery .anime-item {
-      width: 70px;
+      width: 270px; /* Reducimos el tamaño de los elementos en pantallas más pequeñas */
   }
 }
 
 @media (max-width: 480px) {
   .series-galery .anime-item {
-      width: 70px;
+      width: 260px; /* Aún más pequeño en pantallas muy pequeñas */
+  }
+
+  .carousel-container {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: nowrap; /* Evitamos que los elementos se amontonen */
+    justify-content: flex-start;
+    padding: 0 10px; /* Añadimos un pequeño padding a los lados */
+  }
+
+  .series-galery .anime-item {
+    width: 90%; /* El ancho de los elementos se ajusta al 90% */
+    margin: 10px 0; /* Añadimos un margen para dar espacio */
+  }
+
+  .series-galery h2 {
+    font-size: 2.5em; /* Ajuste del tamaño del título */
+  }
+
+  button {
+    font-size: 28px; /* Reducimos el tamaño del botón */
+    padding: 8px; /* Reducimos el padding */
   }
 }
 
@@ -654,7 +674,7 @@ button.next-horror {
 
 @media (max-width: 480px) {
   .horror-series-galery .horror-anime-item {
-      width: 270px;
+      width: 260px;
   }
 }
 
