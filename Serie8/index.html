@@ -141,7 +141,7 @@ const series = {
 };
 
 
-// Total de episodios para la serie actual
+// Obtener el total de episodios de la serie seleccionada
 const totalEpisodes = series[currentSeries].reduce((acc, season) => acc + season.length, 0);
 
 // Función para obtener el episodio actual de una serie específica
@@ -163,14 +163,13 @@ function startEpisode() {
 // Función para cargar el video
 function loadVideo(episodeNumber) {
     const videoContainer = document.getElementById('videoContainer');
-    videoContainer.innerHTML = '';
+    videoContainer.innerHTML = ''; // Limpiar el contenedor de video
 
-    // Calcular la temporada y el episodio
+    // Calcular la temporada y el episodio correcto
     let currentSeason = 0;
     let seasonEpisode = 0;
     let episodeCount = 0;
 
-    // Determina la temporada y el episodio, teniendo en cuenta que cada temporada tiene diferente cantidad de episodios
     for (let i = 0; i < series[currentSeries].length; i++) {
         episodeCount += series[currentSeries][i].length;
         if (episodeCount >= episodeNumber) {
@@ -180,24 +179,24 @@ function loadVideo(episodeNumber) {
         }
     }
 
+    // Crear iframe para el video
     const iframe = document.createElement('iframe');
-    iframe.src = series[currentSeries][currentSeason][seasonEpisode] + '?autoplay=1';
+    iframe.src = series[currentSeries][currentSeason][seasonEpisode]; // No autoplay
     iframe.width = '560';
     iframe.height = '315';
-    iframe.frameborder = '0';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowfullscreen = true;
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    iframe.setAttribute('allowfullscreen', 'true'); // Asegurar compatibilidad con pantalla completa
 
+    // Agregar el video al contenedor
     videoContainer.appendChild(iframe);
-    videoContainer.style.display = 'block';
+    videoContainer.style.display = 'block'; // Mostrar video minimizado en el centro
 
-    currentVideo = iframe;
-    currentEpisode = episodeNumber;
+    currentVideo = iframe; // Guardar el video actual
+    currentEpisode = episodeNumber; // Actualizar el episodio actual
 
-    saveCurrentEpisode(currentSeries, currentEpisode); // Guarda el episodio actual para la serie seleccionada
-
-    toggleFullscreen(videoContainer);
-    updateStartButton();
+    saveCurrentEpisode(currentSeries, currentEpisode);
+    updateStartButton(); // Actualizar botón de inicio
 }
 
 // Función para ir al episodio anterior
@@ -205,7 +204,7 @@ function previousEpisode() {
     if (currentEpisode > 1) {
         currentEpisode--;
         updateStartButton();
-        saveCurrentEpisode(currentSeries, currentEpisode); // Guarda el episodio anterior para la serie seleccionada
+        saveCurrentEpisode(currentSeries, currentEpisode);
     }
 }
 
@@ -214,7 +213,7 @@ function nextEpisode() {
     if (currentEpisode < totalEpisodes) {
         currentEpisode++;
         updateStartButton();
-        saveCurrentEpisode(currentSeries, currentEpisode); // Guarda el siguiente episodio para la serie seleccionada
+        saveCurrentEpisode(currentSeries, currentEpisode);
     }
 }
 
@@ -222,19 +221,17 @@ function nextEpisode() {
 function restartToFirstEpisode() {
     currentEpisode = 1;
     updateStartButton();
-    saveCurrentEpisode(currentSeries, currentEpisode); // Reinicia el progreso de la serie seleccionada
+    saveCurrentEpisode(currentSeries, currentEpisode);
 }
 
-// Función para actualizar el botón
+// Función para actualizar el botón de inicio
 function updateStartButton() {
     const startButton = document.getElementById('startButton');
-    
-    // Calcular la temporada y el episodio actual
+
     let currentSeason = 0;
     let seasonEpisode = 0;
     let episodeCount = 0;
 
-    // Determina la temporada y el episodio
     for (let i = 0; i < series[currentSeries].length; i++) {
         episodeCount += series[currentSeries][i].length;
         if (episodeCount >= currentEpisode) {
@@ -244,58 +241,11 @@ function updateStartButton() {
         }
     }
 
-    // Formato T{currentSeason+1}-E{seasonEpisode+1}
     const seasonText = `T${currentSeason + 1}-E${seasonEpisode + 1}`;
-
-    // Si es el primer episodio de la temporada, mostrar "Iniciar", de lo contrario "Reanudar"
-    if (currentEpisode === 1 || currentEpisode > 1) {
-        startButton.textContent = `Reanudar ${seasonText}`;
-    }
+    startButton.textContent = currentEpisode === 1 ? `Iniciar ${seasonText}` : `Reanudar ${seasonText}`;
 }
 
-// Función para poner el video en pantalla completa
-function toggleFullscreen(element) {
-    const iframe = element.querySelector('iframe');
-    
-    if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-    } else if (iframe.mozRequestFullScreen) {
-        iframe.mozRequestFullScreen();
-    } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-    } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
-    }
-
-    element.style.zIndex = "1000";
-}
-
-// Cuando se cambia el estado de pantalla completa
-function onFullscreenChange() {
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
-        if (currentVideo) {
-            stopVideo(currentVideo);
-        }
-
-        const videoContainer = document.getElementById('videoContainer');
-        videoContainer.innerHTML = '';
-        currentVideo = null;
-        updateStartButton();
-    }
-}
-
-function stopVideo(iframe) {
-    const src = iframe.src.split('?')[0];
-    iframe.src = src;
-}
-
-// Detectar salida de pantalla completa
-document.addEventListener('fullscreenchange', onFullscreenChange);
-document.addEventListener('webkitfullscreenchange', onFullscreenChange);
-document.addEventListener('mozfullscreenchange', onFullscreenChange);
-document.addEventListener('MSFullscreenChange', onFullscreenChange);
-
-// Detectar la tecla Escape para salir del video
+// Detectar tecla Escape para cerrar el video
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         const videoContainer = document.getElementById('videoContainer');
@@ -305,10 +255,11 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Inicialización para recordar el episodio actual al cargar la página
+// Inicialización al cargar la página
 window.onload = function() {
-    updateStartButton(); // Actualizar el texto del botón
-}
+    updateStartButton();
+};
+
 
 
 </script>
