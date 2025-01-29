@@ -441,7 +441,7 @@ body {
 /* Estilos generales */
 .series-galery {
   position: relative;
-  width: 50%; /* Aseguramos que el contenedor ocupe el 100% del espacio */
+  width: 100%; /* Aseguramos que el contenedor ocupe el 100% del espacio */
   overflow: hidden;
   background-color: #000000;
   padding: 30px 0;
@@ -470,7 +470,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 100px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 300px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -535,7 +535,7 @@ button.next {
 
 @media (max-width: 480px) {
   .series-galery .anime-item {
-      width: -50px;
+      width: -90px;
   }
 }
 
