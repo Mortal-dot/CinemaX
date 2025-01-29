@@ -528,13 +528,13 @@ button.next {
 /* Responsive */
 @media (max-width: 768px) {
   .series-galery .anime-item {
-      width: 270px;
+      width: 70px;
   }
 }
 
 @media (max-width: 480px) {
   .series-galery .anime-item {
-      width: 230px;
+      width: 70px;
   }
 }
 
@@ -654,7 +654,7 @@ button.next-horror {
 
 @media (max-width: 480px) {
   .horror-series-galery .horror-anime-item {
-      width: 250px;
+      width: 270px;
   }
 }
 
@@ -675,7 +675,7 @@ button.next-horror {
 
 /* Aseguramos que las imágenes no sean tan grandes */
 .series-galery .anime-item img {
-  width: 100%; /* Asegura que las imágenes ocupen todo el ancho disponible */
+  width: 75%; /* Asegura que las imágenes ocupen todo el ancho disponible */
   max-width: 75%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
   height: auto; /* Mantiene la proporción de las imágenes */
   margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
@@ -717,7 +717,7 @@ button.next-horror {
   }
 
   .series-galery .anime-item {
-    width: 100%; /* Cada item ocupa el 100% del contenedor */
+    width: 50%; /* Cada item ocupa el 100% del contenedor */
     margin: 10px 0;
   }
 
