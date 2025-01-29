@@ -533,7 +533,7 @@ button.next {
 
 @media (max-width: 480px) {
   .anime-item {
-    width: 200px;
+    width: 160px;
   }
 }
 
@@ -543,7 +543,7 @@ button.next {
 /* Responsive */
 @media (max-width: 768px) {
   .series-galery  .anime-item {
-      width: 240px;
+      width: 160px;
   }
 }
 
