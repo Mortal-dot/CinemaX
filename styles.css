@@ -440,7 +440,7 @@ body {
 /* Estilos generales */
 .series-galery {
   position: relative;
-  width: 300%; /* Aseguramos que el contenedor ocupe el 100% del espacio */
+  width: 100%; /* Aseguramos que el contenedor ocupe el 100% del espacio */
   overflow: hidden;
   background-color: #000000;
   padding: 30px 0;
@@ -527,13 +527,13 @@ button.next {
 
 @media (max-width: 768px) {
   .anime-item {
-    width: 700px;
+    width: 100px;
   }
 }
 
 @media (max-width: 480px) {
   .anime-item {
-    width: 700px;
+    width: 100px;
   }
 }
 
