@@ -677,8 +677,8 @@ button.next-horror {
 
 /* Aseguramos que las imágenes no sean tan grandes */
 .series-galery .anime-item img {
-  width: 50%; /* Asegura que las imágenes ocupen todo el ancho disponible */
-  max-width: 50%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
+  width: 100%; /* Asegura que las imágenes ocupen todo el ancho disponible */
+  max-width: 75%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
   height: auto; /* Mantiene la proporción de las imágenes */
   margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
 }
@@ -697,7 +697,7 @@ button.next-horror {
   /* Ajustamos los items para que se alineen correctamente */
   .series-galery .anime-item {
     flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
-    width: 50%; /* Los items de la galería ocuparán el 90% del contenedor */
+    width: 55%; /* Los items de la galería ocuparán el 90% del contenedor */
     margin: 7px 0; /* Mantén un buen espaciado entre los elementos */
   }
 
@@ -719,13 +719,13 @@ button.next-horror {
   }
 
   .series-galery .anime-item {
-    width: 5%; /* Cada item ocupa el 100% del contenedor */
+    width: 25%; /* Cada item ocupa el 100% del contenedor */
     margin: 10px 0;
   }
 
   .series-galery button {
     font-size: 28px;
-    padding: 6px;
+    padding: 3px;
   }
 
   .series-galery h2 {
