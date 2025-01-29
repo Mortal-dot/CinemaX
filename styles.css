@@ -470,7 +470,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 100px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 50px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
    
@@ -694,13 +694,16 @@ button.next-horror {
       padding: 0 3px; /* Añadimos algo de padding lateral para que no toque el borde de la pantalla */
     }
   
-    /* Ajustamos los items para que se alineen correctamente */
-    .series-galery .anime-item {
-      flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
-      width: 30%; /* Los items de la galería ocuparán el 90% del contenedor */
-      margin: 7px 0; /* Mantén un buen espaciado entre los elementos */
-    }
-  
+  /* Ajustamos los items para que se alineen correctamente */
+.series-galery .anime-item {
+  flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
+  width: 100%; /* Los items ocuparán el 100% del contenedor */
+  max-width: 200px; /* Limita el tamaño máximo de cada item */
+  margin: 7px auto; /* Espaciado entre los elementos */
+  text-align: center;
+  box-sizing: border-box; /* Asegura que el padding y el margin no afecten el ancho final */
+}
+
     /* Ajustamos el tamaño de las flechas */
     .series-galery button {
       font-size: 34px;
