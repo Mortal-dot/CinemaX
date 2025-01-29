@@ -670,6 +670,21 @@ button.next-horror {
 
 
 
+/* Optimización para la barra de desplazamiento */
+body {
+  overflow-x: hidden; /* Evitar desplazamiento horizontal en pantallas pequeñas */
+}
+
+/* Asegurar que las imágenes y los videos se ajusten bien */
+.anime-item img, .anime-item video {
+  width: 100%; /* Asegura que las imágenes no se desborden */
+  height: auto;
+}
+
+/* Evitar que los elementos se sobrepongan */
+.anime-gallery, .horror-series-galery {
+  padding: 10px;
+}
 
 
 
