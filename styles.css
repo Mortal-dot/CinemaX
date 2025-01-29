@@ -533,7 +533,7 @@ button.next {
 
 @media (max-width: 480px) {
   .anime-item {
-    width: 100px;
+    width: 200px;
   }
 }
 
