@@ -667,7 +667,28 @@ button.next-horror {
 
 
 
+/* Optimización para pantallas pequeñas (dispositivos móviles) */
 
+/* Asegurar que el fondo de la galería se ajuste correctamente en móviles */
+.anime-gallery {
+  background-size: 100% 100%; /* Esto asegura que el fondo cubra toda la pantalla */
+}
+
+/* Ajustes para la galería en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .anime-gallery {
+      grid-template-columns: repeat(2, 1fr); /* 2 elementos por fila en pantallas medianas */
+  }
+
+  .anime-item {
+      width: 100%; /* Asegura que los items no se sobrepongan */
+      margin: 10px 0; /* Espaciado adicional */
+  }
+
+  header h1 {
+      font-size: 3em; /* Ajustar el tamaño del título en pantallas más pequeñas */
+  }
+}
 
 
 
