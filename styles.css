@@ -470,7 +470,7 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 300px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 200px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -677,8 +677,8 @@ button.next-horror {
 
 /* Aseguramos que las imágenes no sean tan grandes */
 .series-galery .anime-item img {
-    width: 25%; /* Asegura que las imágenes ocupen todo el ancho disponible */
-    max-width: 20%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
+    width: 35%; /* Asegura que las imágenes ocupen todo el ancho disponible */
+    max-width: 35%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
     height: auto; /* Mantiene la proporción de las imágenes */
     margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
   }
