@@ -677,59 +677,60 @@ button.next-horror {
 
 /* Aseguramos que las imágenes no sean tan grandes */
 .series-galery .anime-item img {
-  width: 75%; /* Asegura que las imágenes ocupen todo el ancho disponible */
-  max-width: 75%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
-  height: auto; /* Mantiene la proporción de las imágenes */
-  margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
-}
-
-/* Ajustes para la galería en pantallas más pequeñas */
-@media (max-width: 768px) {
-  /* Ajustamos el padding del contenedor para que no ocupe todo el ancho */
-  .series-galery .carousel-container {
-    display: flex;
-    overflow: hidden;
-    flex-wrap: nowrap; /* Evita que los elementos se sobrepongan */
-    justify-content: flex-start; /* Hace que los elementos se alineen a la izquierda */
-    padding: 0 10px; /* Reducimos el padding lateral para que no esté tan grande */
+    width: 50%; /* Asegura que las imágenes ocupen todo el ancho disponible */
+    max-width: 50%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
   }
-
-  /* Ajustamos los items para que se alineen correctamente */
-  .series-galery .anime-item {
-    flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
-    width: 40%; /* Los items de la galería ocuparán el 40% del contenedor */
-    margin: 7px 5px; /* Añadimos un margen lateral más pequeño */
+  
+  /* Ajustes para la galería en pantallas más pequeñas */
+  @media (max-width: 768px) {
+    /* Aseguramos que la galería no ocupe todo el ancho, pero que aún tenga un margen */
+    .series-galery .carousel-container {
+      display: flex;
+      overflow: hidden;
+      flex-wrap: nowrap; /* Evita que los elementos se sobrepongan */
+      justify-content: flex-start; /* Hace que los elementos se alineen a la izquierda */
+      padding: 0 3px; /* Añadimos algo de padding lateral para que no toque el borde de la pantalla */
+    }
+  
+    /* Ajustamos los items para que se alineen correctamente */
+    .series-galery .anime-item {
+      flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
+      width: 40%; /* Los items de la galería ocuparán el 90% del contenedor */
+      margin: 7px 0; /* Mantén un buen espaciado entre los elementos */
+    }
+  
+    /* Ajustamos el tamaño de las flechas */
+    .series-galery button {
+      font-size: 34px;
+      padding: 8px;
+    }
+  
+    .series-galery h2 {
+      font-size: 2.5em; /* Ajusta el tamaño del título en pantallas pequeñas */
+    }
   }
-
-  /* Ajustamos el tamaño de las flechas */
-  .series-galery button {
-    font-size: 34px;
-    padding: 8px;
+  
+  /* En dispositivos muy pequeños (menos de 480px) */
+  @media (max-width: 480px) {
+    .series-galery .carousel-container {
+      flex-direction: column; /* Las imágenes se apilan verticalmente en dispositivos pequeños */
+    }
+  
+    .series-galery .anime-item {
+      width: 15%; /* Cada item ocupa el 100% del contenedor */
+      margin: 10px 0;
+    }
+  
+    .series-galery button {
+      font-size: 28px;
+      padding: 3px;
+    }
+  
+    .series-galery h2 {
+      font-size: 2em; /* Ajuste del tamaño del título */
+    }
   }
-
-  .series-galery h2 {
-    font-size: 2.5em; /* Ajusta el tamaño del título en pantallas pequeñas */
-  }
-}
-
-/* En dispositivos muy pequeños (menos de 480px) */
-@media (max-width: 480px) {
-  .series-galery .carousel-container {
-    flex-direction: column; /* Las imágenes se apilan verticalmente en dispositivos pequeños */
-  }
-
-  .series-galery .anime-item {
-    width: 90%; /* Los elementos ocupan un 90% del ancho disponible */
-    margin: 5px 0; /* Reducimos el margen lateral para un diseño más compacto */
-  }
-
-  .series-galery button {
-    font-size: 28px;
-    padding: 3px;
-  }
-
-  .series-galery h2 {
-    font-size: 2em; /* Ajuste del tamaño del título */
-  }
-}
+  
 
