@@ -327,8 +327,8 @@ body {
 .series-galery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 30px;
+    gap: 50px;
+    padding: 50px;
   }
   
   /* Estilo para cada ítem de serie */
@@ -414,7 +414,7 @@ body {
     overflow: hidden;
     border-radius: 20px; /* Esto hace que las esquinas sean redondeadas */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para darle un toque elegante */
- 
+    background-color: #f5f5f5; /* Color de fondo opcional */
 }
 
 .anime-item video {
@@ -423,7 +423,6 @@ body {
     object-fit: cover; /* Asegura que el video ocupe todo el espacio del contenedor */
     border-radius: 20px; /* Aplica el borde redondeado al video también */
 }
-
 
 
 
@@ -470,10 +469,10 @@ h2 {
 
 .anime-item {
     margin: 0 20px; /* Aumentamos el margen entre los elementos */
-    width: 50px; /* Aumentamos el ancho de cada contenedor de serie */
+    width: 230px; /* Aumentamos el ancho de cada contenedor de serie */
     text-align: center;
     position: relative;
-   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
     background-color: rgb(255, 255, 255);
@@ -528,18 +527,16 @@ button.next {
 
 @media (max-width: 768px) {
   .anime-item {
-    width: -130px;
+    width: 180px;
   }
 }
 
 @media (max-width: 480px) {
   .anime-item {
-    width: -170px;
+    width: 150px;
   }
 }
 
-  
-  
   
 
 
@@ -650,18 +647,15 @@ button.next-horror {
 /* Responsive */
 @media (max-width: 768px) {
   .horror-series-galery .horror-anime-item {
-      width: 270px;
+      width: 240px;
   }
 }
 
 @media (max-width: 480px) {
   .horror-series-galery .horror-anime-item {
-      width: 260px;
+      width: 200px;
   }
 }
-
-
-
 
 
 
@@ -675,67 +669,74 @@ button.next-horror {
 
 /* Optimización para pantallas pequeñas (dispositivos móviles) */
 
-/* Aseguramos que las imágenes no sean tan grandes */
-.series-galery .anime-item img {
-    width: 28%; /* Asegura que las imágenes ocupen todo el ancho disponible */
-    max-width: 28%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
-    height: auto; /* Mantiene la proporción de las imágenes */
-    margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
-  }
-  
-  /* Ajustes para la galería en pantallas más pequeñas */
-  @media (max-width: 768px) {
-    /* Aseguramos que la galería no ocupe todo el ancho, pero que aún tenga un margen */
-    .series-galery .carousel-container {
-      display: flex;
-      overflow: hidden;
-      flex-wrap: nowrap; /* Evita que los elementos se sobrepongan */
-      justify-content: flex-start; /* Hace que los elementos se alineen a la izquierda */
-      padding: 0 3px; /* Añadimos algo de padding lateral para que no toque el borde de la pantalla */
-    }
-  
-  /* Ajustamos los items para que se alineen correctamente */
-.series-galery .anime-item {
-  flex: 0 0 auto; /* Permite que los elementos se ajusten sin forzar el 100% de ancho */
-  width: 100%; /* Los items ocuparán el 100% del contenedor */
-  max-width: 200px; /* Limita el tamaño máximo de cada item */
-  margin: 7px auto; /* Espaciado entre los elementos */
-  text-align: center;
-  box-sizing: border-box; /* Asegura que el padding y el margin no afecten el ancho final */
+/* Asegurar que el fondo de la galería se ajuste correctamente en móviles */
+.anime-gallery {
+  background-size: 50% 50%; /* Esto asegura que el fondo cubra toda la pantalla */
 }
 
-    /* Ajustamos el tamaño de las flechas */
-    .series-galery button {
-      font-size: 34px;
-      padding: 8px;
-    }
-  
-    .series-galery h2 {
-      font-size: 2.5em; /* Ajusta el tamaño del título en pantallas pequeñas */
-    }
+/* Ajustes para la galería en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .anime-gallery {
+      grid-template-columns: repeat(2, 1fr); /* 2 elementos por fila en pantallas medianas */
   }
-  
-  /* En dispositivos muy pequeños (menos de 480px) */
-  @media (max-width: 480px) {
-    .series-galery .carousel-container {
-      flex-direction: column; /* Las imágenes se apilan verticalmente en dispositivos pequeños */
-    }
-  
-    .series-galery .anime-item {
-      width: 40%; /* Cada item ocupa el 100% del contenedor */
-      margin: 10px 0;
-    }
-  
-    .series-galery button {
-      font-size: 38px;
-      padding: 3px;
-    }
-  
-    .series-galery h2 {
-      font-size: 2em; /* Ajuste del tamaño del título */
-    }
+
+  .anime-item {
+      width: 100%; /* Asegura que los items no se sobrepongan */
+      margin: 10px 0; /* Espaciado adicional */
   }
-  
+
+  header h1 {
+      font-size: 3em; /* Ajustar el tamaño del título en pantallas más pequeñas */
+  }
+}
+
+/* En dispositivos muy pequeños (móviles con pantallas de menos de 480px) */
+@media (max-width: 480px) {
+  .anime-gallery {
+      grid-template-columns: 1fr; /* 1 elemento por fila en pantallas muy pequeñas */
+  }
+
+  .anime-item {
+      width: 100%;
+      margin: 10px 0; /* Asegura un buen espaciado */
+  }
+
+  header h1 {
+      font-size: 2.5em; /* Más pequeño en pantallas muy pequeñas */
+  }
+
+  .anime-item p {
+      font-size: 1rem; /* Ajusta el tamaño del texto */
+  }
+
+  button {
+      font-size: 28px; /* Ajuste del tamaño del botón */
+      padding: 8px; /* Menos padding en dispositivos pequeños */
+  }
+}
+
+/* Estilos adicionales para el footer en dispositivos móviles */
+footer {
+  font-size: 0.9em; /* Ajuste del tamaño del texto */
+  padding: 15px;
+}
+
+/* Optimización para la barra de desplazamiento */
+body {
+  overflow-x: hidden; /* Evitar desplazamiento horizontal en pantallas pequeñas */
+}
+
+/* Asegurar que las imágenes y los videos se ajusten bien */
+.anime-item img, .anime-item video {
+  width: 100%; /* Asegura que las imágenes no se desborden */
+  height: auto;
+}
+
+/* Evitar que los elementos se sobrepongan */
+.anime-gallery, .horror-series-galery {
+  padding: 10px;
+}
+
 
 
 
