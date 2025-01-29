@@ -535,7 +535,7 @@ button.next {
 
 @media (max-width: 480px) {
   .series-galery .anime-item {
-      width: -10px;
+      width: -50px;
   }
 }
 
@@ -677,8 +677,8 @@ button.next-horror {
 
 /* Aseguramos que las imágenes no sean tan grandes */
 .series-galery .anime-item img {
-  width: 40%; /* Asegura que las imágenes ocupen todo el ancho disponible */
-  max-width: 40%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
+  width: 50%; /* Asegura que las imágenes ocupen todo el ancho disponible */
+  max-width: 50%; /* Limita el tamaño máximo de la imagen al 90% del contenedor */
   height: auto; /* Mantiene la proporción de las imágenes */
   margin: 0 auto; /* Centra las imágenes dentro de su contenedor */
 }
