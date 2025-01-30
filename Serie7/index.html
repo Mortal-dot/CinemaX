@@ -109,11 +109,11 @@ function loadVideo(episodeNumber) {
     videoContainer.innerHTML = ''; // Limpiar el contenedor de video
 
     const iframe = document.createElement('iframe');
-    iframe.src = episodes[episodeNumber - 1] + '?autoplay=1'; // Cargar el video con autoplay
+    iframe.src = episodes[episodeNumber - 1]; // Cargar el video con autoplay
     iframe.width = '560';
     iframe.height = '315';
     iframe.frameborder = '0';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allow = 'autoplay; fullscreen; encrypted-media';
     iframe.allowfullscreen = true;
 
     videoContainer.appendChild(iframe);
@@ -127,38 +127,6 @@ function loadVideo(episodeNumber) {
 
     // Guardar el episodio actual en localStorage
     localStorage.setItem('currentEpisode', currentEpisode);
-
-    // Si hay un tiempo guardado, comenzamos desde ahí
-    iframe.onload = function() {
-        if (currentTime > 0) {
-            // Cuando el video ha cargado, reposicionamos el tiempo
-            iframe.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[' + currentTime + ',true]}', '*');
-        }
-
-        // Guardar el progreso mientras se reproduce
-        iframe.contentWindow.addEventListener('message', function(event) {
-            if (event.origin !== 'https://www.youtube.com') return;
-
-            const data = JSON.parse(event.data);
-
-            // Cuando el video está en reproducción, capturamos el tiempo
-            if (data.event === 'onStateChange' && data.info === 1) {
-                setInterval(() => {
-                    // Obtener tiempo de reproducción
-                    iframe.contentWindow.postMessage('{"event":"command","func":"getCurrentTime","args":[]}', '*');
-                }, 1000);
-            }
-
-            // Guardar el tiempo en localStorage
-            if (data.event === 'onStateChange' && data.info === 1) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"getCurrentTime","args":[]}', '*');
-            }
-        });
-    }
-
-    // Asegurarse de que el video se reproduce automáticamente
-    toggleFullscreen(videoContainer); // Poner en pantalla completa
-    updateStartButton(); // Actualizar el texto del botón
 }
 
 function previousEpisode() {
@@ -182,7 +150,6 @@ function restartToFirstEpisode() {
     currentEpisode = 1; // Establecer el episodio al primero
     updateStartButton(); // Actualizar el botón para reflejar el episodio actual
     localStorage.setItem('currentEpisode', currentEpisode); // Guardar el primer episodio en localStorage
-    localStorage.setItem('currentTime', 0); // Reiniciar el tiempo en localStorage
 }
 
 // Función para actualizar el texto del botón
@@ -213,20 +180,6 @@ function toggleFullscreen(element) {
     element.style.zIndex = "1000"; // Coloca el iframe sobre los otros elementos
 }
 
-// Cuando se cambia el estado de pantalla completa
-function onFullscreenChange() {
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
-        if (currentVideo) {
-            stopVideo(currentVideo);
-        }
-
-        const videoContainer = document.getElementById('videoContainer');
-        videoContainer.innerHTML = ''; // Eliminar el contenido de videoContainer
-        currentVideo = null; // Limpiar la referencia al video actual
-        updateStartButton(); // Actualizar el botón
-    }
-}
-
 function stopVideo(iframe) {
     const src = iframe.src.split('?')[0]; // Eliminar parámetros como autoplay
     iframe.src = src; // Detener el video cambiando el iframe
@@ -248,10 +201,10 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Inicialización para recordar el episodio actual al cargar la página
+// Detectar cuando la página está lista
 window.onload = function() {
     updateStartButton(); // Actualizar el texto del botón para reflejar el episodio
-}
+};
 
 </script>
 
