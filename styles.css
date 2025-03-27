@@ -687,3 +687,43 @@ button.next-horror {
 
 
 
+/* Estilo general para la galería */
+.anime-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 15px; /* Espacio entre las imágenes */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos de cada imagen en la galería */
+.anime-item {
+    text-align: center;
+}
+
+.anime-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Poner un pequeño espacio entre el texto y la imagen */
+.anime-item p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .anime-gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas para pantallas pequeñas */
+    }
+}
+
+/* Estilos para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    .anime-gallery {
+        grid-template-columns: 1fr; /* 1 columna para pantallas muy pequeñas */
+    }
+}
