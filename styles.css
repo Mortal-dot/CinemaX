@@ -685,10 +685,5 @@ button.next-horror {
 
 
 
-.carousel-images {
-  display: flex;
-  transition: transform 0.4s ease;
-  overflow: hidden; /* importante para evitar desplazamiento visual */
-}
 
 
